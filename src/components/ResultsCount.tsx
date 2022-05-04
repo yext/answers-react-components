@@ -5,8 +5,9 @@ import {
   VerticalSearchState
 } from '@yext/answers-headless-react';
 import classNames from 'classnames';
-import { processTranslation } from './utils/processTranslation';
 import { CompositionMethod, useComposedCssClasses } from '../hooks/useComposedCssClasses';
+import { useTranslation, I18nextProvider } from 'react-i18next';
+import i18n from '../i18n';
 
 /**
  *  The CSS class interface for {@link ResultsCount}.
@@ -42,7 +43,7 @@ const builtInCssClasses: ResultsCountCssClasses = {
  *
  * @param props - {@link ResultsCountProps}
  */
-export function ResultsCount(props: ResultsCountProps): JSX.Element | null {
+function ResultsCountComponent(props: ResultsCountProps): JSX.Element | null {
   const { customCssClasses, cssCompositionMethod } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses, cssCompositionMethod);
   const isLoading = useAnswersState(state => state.searchStatus.isLoading);
@@ -54,12 +55,22 @@ export function ResultsCount(props: ResultsCountProps): JSX.Element | null {
   return <div className={resultsCountClassnames}>{resultsCountText}</div>;
 }
 
+export function ResultsCount(props: ResultsCountProps): JSX.Element | null {
+  return (
+    <I18nextProvider i18n={i18n}>
+      <ResultsCountComponent {...props}/>
+    </I18nextProvider>
+  );
+}
+
 /**
  * Generates a string for the results count of the recent universal/vertical search.
  */
 function useResultsCount() {
   const isVertical = useAnswersState(state => state.meta.searchType) === SearchTypeEnum.Vertical;
   const results = useAnswersState(state => isVertical ? state.vertical : state.universal.verticals);
+  const { t } = useTranslation();
+
   let resultsCount = 0;
   if (results) {
     if (isUniversalSearchResults(results)) {
@@ -71,11 +82,7 @@ function useResultsCount() {
   if (resultsCount === 0) {
     return null;
   }
-  const resultsCountText = processTranslation({
-    phrase: `${resultsCount} Result`,
-    pluralForm: `${resultsCount} Results`,
-    count: resultsCount
-  });
+  const resultsCountText = t('{{count}} Results', { count: resultsCount });
   return resultsCountText;
 }
 

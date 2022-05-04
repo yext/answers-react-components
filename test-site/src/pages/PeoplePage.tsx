@@ -1,5 +1,6 @@
 import { useAnswersActions } from '@yext/answers-headless-react';
 import {
+  AlternativeVerticals,
   AppliedFilters,
   FilterSearch,
   ResultsCount,
@@ -28,6 +29,11 @@ export function PeoplePage() {
         </div>
         <div className='flex-grow'>
           <div className='flex items-baseline'>
+            <AlternativeVerticals currentVerticalLabel='People' verticalConfigMap={{
+                products: {
+                  label: 'Products'
+                }
+              }}/>
             <ResultsCount />
             <AppliedFilters hierarchicalFacetsFieldIds={hierarchicalFacetFieldIds}/>
           </div>

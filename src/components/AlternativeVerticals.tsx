@@ -1,4 +1,3 @@
-import { processTranslation } from './utils/processTranslation';
 import { StarIcon } from '../icons/StarIcon';
 import { useAnswersState, VerticalResults as VerticalResultsData } from '@yext/answers-headless-react';
 import { CompositionMethod, useComposedCssClasses } from '../hooks/useComposedCssClasses';
@@ -6,6 +5,8 @@ import classNames from 'classnames';
 import { isVerticalLink, VerticalLink } from '../models/verticalLink';
 import { UniversalLink } from '../models/universalLink';
 import { VerticalConfig } from '../models/verticalConfig';
+import { I18nextProvider, Trans } from 'react-i18next';
+import i18n from '../i18n';
 
 /**
  * The CSS class interface used for {@link AlternativeVerticals}.
@@ -98,7 +99,7 @@ export interface AlternativeVerticalsProps {
  * @param props - {@link AlternativeVerticalsProps}
  * @returns A React element for the alternative verticals, or null if there are none with results
  */
-export function AlternativeVerticals({
+export function AlternativeVerticalsComponent({
   currentVerticalLabel,
   verticalConfigMap,
   displayAllOnNoResults = true,
@@ -158,14 +159,9 @@ export function AlternativeVerticals({
       {verticalSuggestions &&
         <div className={cssClasses.suggestions}>
           <div className={cssClasses.categoriesText}>
-            <span>
-              {processTranslation({
-                phrase: 'The following category yielded results for - ',
-                pluralForm: 'The following categories yielded results for - ',
-                count: verticalSuggestions.length
-              })}
-            </span>
-            <strong>{query}</strong>
+            <Trans i18nKey='alternativeVerticals' count={verticalSuggestions.length}>
+              <span>The following category yielded results for - </span><strong>{{ query }}</strong>
+            </Trans>
           </div>
           <ul className={cssClasses.suggestionList}>
             {verticalSuggestions.map(renderSuggestion)}
@@ -210,4 +206,12 @@ export function AlternativeVerticals({
       </div>
     );
   }
+}
+
+export function AlternativeVerticals(props: AlternativeVerticalsProps): JSX.Element | null {
+  return (
+    <I18nextProvider i18n={i18n}>
+      <AlternativeVerticalsComponent {...props}/>
+    </I18nextProvider>
+  );
 }

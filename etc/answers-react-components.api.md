@@ -15,6 +15,7 @@ import { Context } from 'react';
 import { DirectAnswer as DirectAnswer_2 } from '@yext/answers-headless-react';
 import { DisplayableFacet } from '@yext/answers-headless-react';
 import { HighlightedValue } from '@yext/answers-headless-react';
+import i18n from 'i18next';
 import { Matcher } from '@yext/answers-headless-react';
 import { NumberRangeValue } from '@yext/answers-headless-react';
 import { PropsWithChildren } from 'react';
@@ -464,6 +465,8 @@ export interface HighlightedValueCssClasses {
     // (undocumented)
     nonHighlighted?: string;
 }
+
+export { i18n }
 
 // @public
 export type InferTypeGuard<TypeGuard> = TypeGuard extends (data: any) => data is infer Type ? Type : never;

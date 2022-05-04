@@ -1,0 +1,5 @@
+{
+  "{{count}} Results": "{{count}} Resultados",
+  "alternativeVerticals_one": "<span>La siguiente categoría arrojó resultados para - </span><strong>{{query}}</strong>",
+  "alternativeVerticals_other": "<span>Las siguientes categorías dieron resultados para - </span><strong>{{query}}</strong>"
+}

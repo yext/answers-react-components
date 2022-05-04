@@ -5,7 +5,6 @@
   "author": "slapshot@yext.com",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
-  "type": "module",
   "files": [
     "lib",
     "src",
@@ -118,8 +117,10 @@
     "@tailwindcss/forms": "^0.5.0",
     "@yext/analytics": "^0.2.0-beta.3",
     "classnames": "^2.3.1",
+    "i18next": "^21.6.16",
     "prop-types": "^15.8.1",
     "react-collapsed": "^3.3.0",
+    "react-i18next": "^11.16.7",
     "recent-searches": "^1.0.5",
     "use-isomorphic-layout-effect": "^1.1.2",
     "uuid": "^8.3.2"
@@ -130,6 +131,7 @@
   },
   "exports": {
     ".": "./lib/index.js",
-    "./bundle.css": "./lib/bundle.css"
+    "./bundle.css": "./lib/bundle.css",
+    "./es.json": "./src/es.json"
   }
 }

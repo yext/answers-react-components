@@ -5,8 +5,10 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.5.0",
     "@yext/answers-react-components": "file:..",
+    "i18next": "^21.6.16",
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
+    "react-i18next": "^11.16.7",
     "react-router-dom": "^6.2.2"
   },
   "devDependencies": {
