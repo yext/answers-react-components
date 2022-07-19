@@ -128,10 +128,10 @@ export {
 } from './ApplyFiltersButton';
 
 export {
-  GoogleMaps,
-  GoogleMapsCssClasses,
-  GoogleMapsProps
-} from './GoogleMaps';
+  Mapbox,
+  MapboxCssClasses,
+  MapboxProps
+} from './Mapbox';
 
 export {
   renderHighlightedValue,

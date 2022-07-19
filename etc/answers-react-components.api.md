@@ -254,33 +254,6 @@ export function getSearchIntents(answersActions: AnswersActions): Promise<Search
 export function getUserLocation(geolocationOptions?: PositionOptions): Promise<GeolocationPosition>;
 
 // @public
-export function GoogleMaps(props: GoogleMapsProps): JSX.Element;
-
-// @public
-export interface GoogleMapsCssClasses {
-    // (undocumented)
-    googleMapsContainer?: string;
-}
-
-// @public
-export interface GoogleMapsProps {
-    // (undocumented)
-    apiKey: string;
-    // (undocumented)
-    centerLatitude: number;
-    // (undocumented)
-    centerLongitude: number;
-    // (undocumented)
-    customCssClasses?: GoogleMapsCssClasses;
-    // (undocumented)
-    defaultZoom: number;
-    // (undocumented)
-    providerOptions?: google.maps.MapOptions;
-    // (undocumented)
-    showEmptyMap: boolean;
-}
-
-// @public
 export interface HierarchicalFacetDisplayCssClasses {
     // (undocumented)
     allCategoriesOption___active?: string;
@@ -351,6 +324,33 @@ export interface LocationBiasCssClasses {
 export interface LocationBiasProps {
     customCssClasses?: LocationBiasCssClasses;
     geolocationOptions?: PositionOptions;
+}
+
+// @public
+export function Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, providerOptions, customCssClasses }: MapboxProps): JSX.Element;
+
+// @public
+export interface MapboxCssClasses {
+    // (undocumented)
+    mapboxContainer?: string;
+}
+
+// @public
+export interface MapboxProps {
+    // (undocumented)
+    apiKey: string;
+    // (undocumented)
+    centerLatitude: number;
+    // (undocumented)
+    centerLongitude: number;
+    // (undocumented)
+    customCssClasses?: MapboxCssClasses;
+    // (undocumented)
+    defaultZoom: number;
+    // (undocumented)
+    providerOptions?: google.maps.MapOptions;
+    // (undocumented)
+    showEmptyMap: boolean;
 }
 
 // @public

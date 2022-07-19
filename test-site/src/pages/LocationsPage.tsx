@@ -6,9 +6,8 @@ import {
   StandardCard,
   VerticalResults,
   LocationBias,
-  GoogleMaps,
+  Mapbox,
   Pagination,
-  GoogleMapsCssClasses
 } from '@yext/answers-react-components';
 import { useLayoutEffect } from 'react';
 
@@ -33,7 +32,7 @@ export function LocationsPage() {
               <ResultsCount />
               <AppliedFilters />
             </div>
-            <GoogleMaps 
+            <Mapbox 
               apiKey='AIzaSyB5D45ghF1YMfqTLSzWubmlCN1euBVPhFw'
               centerLatitude={37.540778} 
               centerLongitude={-77.433928} 
