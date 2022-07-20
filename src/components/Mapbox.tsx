@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import { Map, MapboxOptions } from 'mapbox-gl';
 /**
  * CSS class interface for the {@link Mapbox} component
  *
@@ -15,17 +16,13 @@ export interface MapboxCssClasses {
  * @public
  */
 export interface MapboxProps {
-  apiKey: string,
-  centerLatitude: number,
-  centerLongitude: number,
-  defaultZoom: number,
-  showEmptyMap: boolean,
-  customCssClasses?: MapboxCssClasses
+  mapboxApiKey: string,
+  mapboxOptions: MapboxOptions,
+  mapCenter?: {
+    lat: number,
+    lng: number
+  }
 }
-
-const builtInCssClasses: Readonly<MapboxCssClasses> = {
-  mapboxContainer: 'h-96 mb-6'
-};
 
 /**
  * A component that renders a map with markers to show result locations.
@@ -36,23 +33,18 @@ const builtInCssClasses: Readonly<MapboxCssClasses> = {
  * @public
  */
 export function Mapbox({
-  apiKey,
-  // centerLatitude,
-  // centerLongitude,
-  // defaultZoom,
-  // showEmptyMap,
-  // customCssClasses
+  mapboxApiKey: apiKey,
 }: MapboxProps) {
   mapboxgl.accessToken = apiKey;
   const mapContainer = useRef(null);
-  const map = useRef<mapboxgl.Map|null>(null);
+  const map = useRef<Map|null>(null);
   const [lng, setLng] = useState(-70.9);
   const [lat, setLat] = useState(42.35);
   const [zoom, setZoom] = useState(9);
 
   useEffect(() => {
     if (mapContainer.current && !map.current) {
-      map.current = new mapboxgl.Map({
+      map.current = new Map({
         container: mapContainer.current,
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [lng, lat],
