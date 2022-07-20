@@ -8,6 +8,7 @@ import {
   LocationBias,
   Mapbox,
   Pagination,
+  MapboxCustomOptions
 } from '@yext/answers-react-components';
 import { useLayoutEffect } from 'react';
 
@@ -17,6 +18,12 @@ export function LocationsPage() {
     answersActions.setVertical('KM');
   });
 
+  const mapboxOptions: MapboxCustomOptions = {
+    center: [-70.9, 42.35],
+    zoom: 10,
+    style: 'mapbox://styles/mapbox/streets-v11',
+  }
+  
   return (
       <div>
         <SearchBar />
@@ -29,11 +36,8 @@ export function LocationsPage() {
               <AppliedFilters />
             </div>
             <Mapbox 
-              apiKey='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
-              centerLatitude={37.540778} 
-              centerLongitude={-77.433928} 
-              defaultZoom={10} 
-              showEmptyMap={false}
+              mapboxApiKey='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
+              mapboxOptions={mapboxOptions}
               />
             <VerticalResults
               CardComponent={StandardCard}

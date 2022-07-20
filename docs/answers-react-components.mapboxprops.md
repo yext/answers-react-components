@@ -16,10 +16,8 @@ export interface MapboxProps
 
 |  Property | Type | Description |
 |  --- | --- | --- |
-|  [apiKey](./answers-react-components.mapboxprops.apikey.md) | string |  |
-|  [centerLatitude](./answers-react-components.mapboxprops.centerlatitude.md) | number |  |
-|  [centerLongitude](./answers-react-components.mapboxprops.centerlongitude.md) | number |  |
-|  [customCssClasses?](./answers-react-components.mapboxprops.customcssclasses.md) | [MapboxCssClasses](./answers-react-components.mapboxcssclasses.md) | <i>(Optional)</i> |
-|  [defaultZoom](./answers-react-components.mapboxprops.defaultzoom.md) | number |  |
-|  [showEmptyMap](./answers-react-components.mapboxprops.showemptymap.md) | boolean |  |
+|  [generateMarkerOptions?](./answers-react-components.mapboxprops.generatemarkeroptions.md) | (result?: Result, index?: number) =&gt; MarkerOptions | <i>(Optional)</i> |
+|  [mapboxApiKey](./answers-react-components.mapboxprops.mapboxapikey.md) | string |  |
+|  [mapboxOptions?](./answers-react-components.mapboxprops.mapboxoptions.md) | [MapboxCustomOptions](./answers-react-components.mapboxcustomoptions.md) | <i>(Optional)</i> |
+|  [mapCenter?](./answers-react-components.mapboxprops.mapcenter.md) | { lat: number; lng: number; } | <i>(Optional)</i> |
 

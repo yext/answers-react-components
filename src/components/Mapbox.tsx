@@ -1,14 +1,14 @@
 import React, { useRef, useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { Map, MapboxOptions } from 'mapbox-gl';
+import { Map, MapboxOptions, MarkerOptions } from 'mapbox-gl';
+import { Result } from '@yext/answers-headless-react';
 /**
- * CSS class interface for the {@link Mapbox} component
+ * Options interface for customizing the {@link Mapbox} map.
+ * The "container" field is omitted.
  *
  * @public
  */
-export interface MapboxCssClasses {
-  mapboxContainer?: string
-}
+export type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
 
 /**
  * Props for the {@link Mapbox} component
@@ -17,7 +17,8 @@ export interface MapboxCssClasses {
  */
 export interface MapboxProps {
   mapboxApiKey: string,
-  mapboxOptions: MapboxOptions,
+  mapboxOptions?: MapboxCustomOptions,
+  generateMarkerOptions?: (result?: Result, index?: number) => MarkerOptions,
   mapCenter?: {
     lat: number,
     lng: number
@@ -33,23 +34,24 @@ export interface MapboxProps {
  * @public
  */
 export function Mapbox({
-  mapboxApiKey: apiKey,
+  mapboxApiKey,
+  mapboxOptions,
+  generateMarkerOptions = defaultGenerateMarkerOptions,
+  mapCenter
 }: MapboxProps) {
-  mapboxgl.accessToken = apiKey;
+  mapboxgl.accessToken = mapboxApiKey;
   const mapContainer = useRef(null);
   const map = useRef<Map|null>(null);
-  const [lng, setLng] = useState(-70.9);
-  const [lat, setLat] = useState(42.35);
-  const [zoom, setZoom] = useState(9);
+  const mapboxOptionsWithRef = useRef<MapboxOptions>();
 
   useEffect(() => {
     if (mapContainer.current && !map.current) {
-      map.current = new Map({
+      const options: MapboxOptions = {
         container: mapContainer.current,
-        style: 'mapbox://styles/mapbox/streets-v11',
-        center: [lng, lat],
-        zoom: zoom
-      });
+        ...mapboxOptions
+      };
+      map.current = new Map(options);
+      mapboxOptionsWithRef.current = options;
     }
   });
 
@@ -58,5 +60,9 @@ export function Mapbox({
       <div ref={mapContainer} />
     </div>
   );
+}
+
+function defaultGenerateMarkerOptions(): MarkerOptions {
+  return {};
 }
 

@@ -13,6 +13,8 @@ import { AnswersHeadless } from '@yext/answers-headless-react';
 import { AutocompleteResponse } from '@yext/answers-headless-react';
 import { DirectAnswer as DirectAnswer_2 } from '@yext/answers-headless-react';
 import { HighlightedValue } from '@yext/answers-headless-react';
+import { MapboxOptions } from 'mapbox-gl';
+import { MarkerOptions } from 'mapbox-gl';
 import { Matcher } from '@yext/answers-headless-react';
 import { NumberRangeValue } from '@yext/answers-headless-react';
 import { PropsWithChildren } from 'react';
@@ -326,28 +328,24 @@ export interface LocationBiasProps {
 }
 
 // @public
-export function Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, customCssClasses }: MapboxProps): JSX.Element;
+export function Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions, mapCenter }: MapboxProps): JSX.Element;
 
 // @public
-export interface MapboxCssClasses {
-    // (undocumented)
-    mapboxContainer?: string;
-}
+export type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
 
 // @public
 export interface MapboxProps {
     // (undocumented)
-    apiKey: string;
+    generateMarkerOptions?: (result?: Result, index?: number) => MarkerOptions;
     // (undocumented)
-    centerLatitude: number;
+    mapboxApiKey: string;
     // (undocumented)
-    centerLongitude: number;
+    mapboxOptions?: MapboxCustomOptions;
     // (undocumented)
-    customCssClasses?: MapboxCssClasses;
-    // (undocumented)
-    defaultZoom: number;
-    // (undocumented)
-    showEmptyMap: boolean;
+    mapCenter?: {
+        lat: number;
+        lng: number;
+    };
 }
 
 // @public

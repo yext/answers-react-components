@@ -22,7 +22,7 @@
 |  [HierarchicalFacets({ searchOnChange, collapsible, defaultExpanded, includedFieldIds, customCssClasses, delimiter, showMoreLimit })](./answers-react-components.hierarchicalfacets.md) | A component that displays hierarchical facets, in a tree level structure, applicable to the current vertical search. |
 |  [isCtaData(data)](./answers-react-components.isctadata.md) | Type guard for CtaData. |
 |  [LocationBias({ geolocationOptions, customCssClasses })](./answers-react-components.locationbias.md) | A React Component which displays and collects location information in order to bias searches. |
-|  [Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, customCssClasses })](./answers-react-components.mapbox.md) | A component that renders a map with markers to show result locations. |
+|  [Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions, mapCenter })](./answers-react-components.mapbox.md) | A component that renders a map with markers to show result locations. |
 |  [NumericalFacets({ searchOnChange, includedFieldIds, getFilterDisplayName, inputPrefix, customCssClasses, ...filterGroupProps })](./answers-react-components.numericalfacets.md) | A component that displays numerical facets applicable to the current vertical search. |
 |  [Pagination(props)](./answers-react-components.pagination.md) | Renders a component that divide a series of vertical results into chunks across multiple pages and enable user to navigate between those pages. |
 |  [renderHighlightedValue(highlightedValueOrString, customCssClasses)](./answers-react-components.renderhighlightedvalue.md) | Renders a HighlightedValue with highlighting based on its matchedSubstrings. |
@@ -68,7 +68,6 @@
 |  [HighlightedValueCssClasses](./answers-react-components.highlightedvaluecssclasses.md) | The CSS class interface for [renderHighlightedValue()](./answers-react-components.renderhighlightedvalue.md)<!-- -->. |
 |  [LocationBiasCssClasses](./answers-react-components.locationbiascssclasses.md) | The CSS class interface for the [LocationBias()](./answers-react-components.locationbias.md) component. |
 |  [LocationBiasProps](./answers-react-components.locationbiasprops.md) | The props for the [LocationBias()](./answers-react-components.locationbias.md) component. |
-|  [MapboxCssClasses](./answers-react-components.mapboxcssclasses.md) | CSS class interface for the [Mapbox()](./answers-react-components.mapbox.md) component |
 |  [MapboxProps](./answers-react-components.mapboxprops.md) | Props for the [Mapbox()](./answers-react-components.mapbox.md) component |
 |  [NumericalFacetsCssClasses](./answers-react-components.numericalfacetscssclasses.md) | The CSS class interface for [NumericalFacets()](./answers-react-components.numericalfacets.md)<!-- -->. |
 |  [NumericalFacetsProps](./answers-react-components.numericalfacetsprops.md) | Props for the [NumericalFacets()](./answers-react-components.numericalfacets.md) component. |
@@ -121,6 +120,7 @@
 |  [DropdownItemProps](./answers-react-components.dropdownitemprops.md) | Props for the [DropdownItem()](./answers-react-components.dropdownitem.md)<!-- -->. |
 |  [FeedbackType](./answers-react-components.feedbacktype.md) | Analytics event types for quality feedback. |
 |  [FocusedItemData](./answers-react-components.focuseditemdata.md) | The data associated with the currently focused item. |
+|  [MapboxCustomOptions](./answers-react-components.mapboxcustomoptions.md) | Options interface for customizing the [Mapbox()](./answers-react-components.mapbox.md) map. The "container" field is omitted. |
 |  [onSearchFunc](./answers-react-components.onsearchfunc.md) | The interface of a function which is called on a search. |
 |  [RenderEntityPreviews](./answers-react-components.renderentitypreviews.md) | The type of a functional React component which renders entity previews using a map of vertical key to the corresponding VerticalResults data. |
 |  [SectionComponent](./answers-react-components.sectioncomponent.md) | A component that can be used to render a section template for vertical results. |

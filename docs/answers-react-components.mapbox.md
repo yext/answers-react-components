@@ -9,14 +9,14 @@ A component that renders a map with markers to show result locations.
 <b>Signature:</b>
 
 ```typescript
-export declare function Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, customCssClasses }: MapboxProps): JSX.Element;
+export declare function Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions, mapCenter }: MapboxProps): JSX.Element;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  { apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, customCssClasses } | [MapboxProps](./answers-react-components.mapboxprops.md) |  |
+|  { mapboxApiKey, mapboxOptions, generateMarkerOptions, mapCenter } | [MapboxProps](./answers-react-components.mapboxprops.md) |  |
 
 <b>Returns:</b>
 

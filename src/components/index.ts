@@ -129,7 +129,7 @@ export {
 
 export {
   Mapbox,
-  MapboxCssClasses,
+  MapboxCustomOptions,
   MapboxProps
 } from './Mapbox';
 
