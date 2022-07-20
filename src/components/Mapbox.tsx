@@ -1,10 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Map, MapboxOptions, MarkerOptions } from 'mapbox-gl';
 import { Result } from '@yext/answers-headless-react';
 /**
- * Options interface for customizing the {@link Mapbox} map.
- * The "container" field is omitted.
+ * Interface for customizing the {@link Mapbox} map derived from the Mapbox API's Map options.
+ * The "container" field is set internally.
  *
  * @public
  */
