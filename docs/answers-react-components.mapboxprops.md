@@ -21,6 +21,5 @@ export interface MapboxProps
 |  [centerLongitude](./answers-react-components.mapboxprops.centerlongitude.md) | number |  |
 |  [customCssClasses?](./answers-react-components.mapboxprops.customcssclasses.md) | [MapboxCssClasses](./answers-react-components.mapboxcssclasses.md) | <i>(Optional)</i> |
 |  [defaultZoom](./answers-react-components.mapboxprops.defaultzoom.md) | number |  |
-|  [providerOptions?](./answers-react-components.mapboxprops.provideroptions.md) | google.maps.MapOptions | <i>(Optional)</i> |
 |  [showEmptyMap](./answers-react-components.mapboxprops.showemptymap.md) | boolean |  |
 

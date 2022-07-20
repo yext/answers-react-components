@@ -11,10 +11,6 @@ import {
 } from '@yext/answers-react-components';
 import { useLayoutEffect } from 'react';
 
-const providerOptions: google.maps.MapOptions = {
-  disableDefaultUI: true
-}
-
 export function LocationsPage() {
   const answersActions = useAnswersActions();
   useLayoutEffect(() => {
@@ -33,12 +29,11 @@ export function LocationsPage() {
               <AppliedFilters />
             </div>
             <Mapbox 
-              apiKey='AIzaSyB5D45ghF1YMfqTLSzWubmlCN1euBVPhFw'
+              apiKey='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
               centerLatitude={37.540778} 
               centerLongitude={-77.433928} 
               defaultZoom={10} 
               showEmptyMap={false}
-              providerOptions={providerOptions}
               />
             <VerticalResults
               CardComponent={StandardCard}

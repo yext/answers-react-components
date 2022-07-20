@@ -1,8 +1,4 @@
-import { Result, useAnswersState } from '@yext/answers-headless-react';
 import React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import { twMerge, useComposedCssClasses } from '../hooks/useComposedCssClasses';
-import { Map } from 'react-map-gl';
 
 /**
  * CSS class interface for the {@link Mapbox} component
@@ -24,7 +20,6 @@ export interface MapboxProps {
   centerLongitude: number,
   defaultZoom: number,
   showEmptyMap: boolean,
-  providerOptions?: google.maps.MapOptions,
   customCssClasses?: MapboxCssClasses
 }
 
@@ -46,24 +41,11 @@ export function Mapbox({
   centerLongitude,
   defaultZoom: zoom,
   showEmptyMap,
-  providerOptions,
   customCssClasses
 }: MapboxProps) {
 
-  const initialViewState = {
-    latitude: centerLatitude,
-    longitude: centerLongitude,
-    zoom
-  };
-
   return (
     <div>
-      <Map
-        mapboxAccessToken='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
-        initialViewState={initialViewState}
-        style={{width: 600, height: 400}}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
-      />
     </div>
 
   );

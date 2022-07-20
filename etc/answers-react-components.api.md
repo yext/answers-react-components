@@ -4,7 +4,6 @@
 
 ```ts
 
-/// <reference types="google.maps" />
 /// <reference types="react" />
 
 import { AnalyticsConfig } from '@yext/analytics';
@@ -327,7 +326,7 @@ export interface LocationBiasProps {
 }
 
 // @public
-export function Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, providerOptions, customCssClasses }: MapboxProps): JSX.Element;
+export function Mapbox({ apiKey, centerLatitude, centerLongitude, defaultZoom: zoom, showEmptyMap, customCssClasses }: MapboxProps): JSX.Element;
 
 // @public
 export interface MapboxCssClasses {
@@ -347,8 +346,6 @@ export interface MapboxProps {
     customCssClasses?: MapboxCssClasses;
     // (undocumented)
     defaultZoom: number;
-    // (undocumented)
-    providerOptions?: google.maps.MapOptions;
     // (undocumented)
     showEmptyMap: boolean;
 }
