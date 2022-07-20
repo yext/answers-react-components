@@ -1,5 +1,5 @@
-import React from 'react';
-
+import React, { useRef, useEffect, useState } from 'react';
+import mapboxgl from 'mapbox-gl';
 /**
  * CSS class interface for the {@link Mapbox} component
  *
@@ -37,17 +37,34 @@ const builtInCssClasses: Readonly<MapboxCssClasses> = {
  */
 export function Mapbox({
   apiKey,
-  centerLatitude,
-  centerLongitude,
-  defaultZoom: zoom,
-  showEmptyMap,
-  customCssClasses
+  // centerLatitude,
+  // centerLongitude,
+  // defaultZoom,
+  // showEmptyMap,
+  // customCssClasses
 }: MapboxProps) {
+  mapboxgl.accessToken = apiKey;
+  const mapContainer = useRef(null);
+  const map = useRef<mapboxgl.Map|null>(null);
+  const [lng, setLng] = useState(-70.9);
+  const [lat, setLat] = useState(42.35);
+  const [zoom, setZoom] = useState(9);
+
+  useEffect(() => {
+    if (mapContainer.current && !map.current) {
+      map.current = new mapboxgl.Map({
+        container: mapContainer.current,
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [lng, lat],
+        zoom: zoom
+      });
+    }
+  });
 
   return (
     <div>
+      <div ref={mapContainer} />
     </div>
-
   );
 }
 
