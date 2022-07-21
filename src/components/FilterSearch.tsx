@@ -1,8 +1,9 @@
-import { AutocompleteResult, Filter, FilterSearchResponse, SearchParameterField, useSearchActions } from '@yext/search-headless-react';
+import { AutocompleteResult, Filter, FilterSearchResponse, SearchParameterField, useSearchActions, useSearchState } from '@yext/search-headless-react';
 import { useCallback, useMemo, useState } from 'react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import { useSynchronizedRequest } from '../hooks/useSynchronizedRequest';
 import { executeSearch } from '../utils';
+import { isDuplicateFilter } from '../utils/filterutils';
 import { Dropdown } from './Dropdown/Dropdown';
 import { DropdownInput } from './Dropdown/DropdownInput';
 import { DropdownItem } from './Dropdown/DropdownItem';
@@ -77,12 +78,24 @@ export function FilterSearch({
     return { ...searchField, fetchEntities: false };
   });
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses);
+  const [currentFilter, setCurrentFilter] = useState<Filter>();
+  const [ query, setQuery ] = useState<string>();
+  const filters = useSearchState(state => state.filters.static);
+  filters?.forEach(f => {
+    if (currentFilter && isDuplicateFilter(f, currentFilter) && !f.selected) {
+      setCurrentFilter(undefined);
+      setQuery('');
+    }
+  });
 
   const [
     filterSearchResponse,
     executeFilterSearch
   ] = useSynchronizedRequest<string, FilterSearchResponse>(
-    inputValue => searchActions.executeFilterSearch(inputValue ?? '', sectioned, searchParamFields),
+    inputValue => {
+      setQuery(inputValue);
+      return searchActions.executeFilterSearch(inputValue ?? '', sectioned, searchParamFields);
+    },
     (e) => console.error('Error occured executing a filter search request.\n', e)
   );
 
@@ -91,7 +104,6 @@ export function FilterSearch({
   }, [filterSearchResponse?.sections]);
 
   const hasResults = sections.flatMap(s => s.results).length > 0;
-  const [currentFilter, setCurrentFilter] = useState<Filter>();
 
   const handleDropdownEvent = useCallback((itemData, select) => {
     const newFilter = itemData?.filter as Filter;
@@ -164,6 +176,7 @@ export function FilterSearch({
         screenReaderText={getScreenReaderText(sections)}
         onSelect={handleSelectDropdown}
         onToggle={handleToggleDropdown}
+        parentQuery={query}
       >
         <DropdownInput
           className={cssClasses.inputElement}

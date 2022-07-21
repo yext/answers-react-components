@@ -10,6 +10,7 @@ import { useInputContext } from './InputContext';
 export function DropdownInput(props: {
   className?: string,
   placeholder?: string,
+  initialValue?: string,
   ariaLabel?: string,
   onSubmit?: (value: string, index: number, focusedItemData: FocusedItemData | undefined ) => void,
   onFocus?: (value: string) => void,
@@ -27,7 +28,6 @@ export function DropdownInput(props: {
   } = props;
 
   const inputRef = useRef<HTMLInputElement>(null);
-
   const { toggleDropdown, onSelect, screenReaderUUID } = useDropdownContext();
   const { value = '', setLastTypedOrSubmittedValue } = useInputContext();
   const {
