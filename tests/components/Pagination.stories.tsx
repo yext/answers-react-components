@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext } from '@yext/answers-headless-react';
+import { SearchHeadlessContext } from '@yext/search-headless-react';
 
 import { Pagination, PaginationProps } from '../../src/components/Pagination';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { VerticalSearcherState } from '../__fixtures__/headless-state';
 
 const meta: ComponentMeta<typeof Pagination> = {
@@ -15,7 +15,7 @@ export default meta;
 
 export const Primary = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 7,
@@ -23,13 +23,13 @@ export const Primary = (args: PaginationProps) => {
       }
     })}>
       <Pagination {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const PaginateAllOnNoResults = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 0,
@@ -41,13 +41,13 @@ export const PaginateAllOnNoResults = (args: PaginationProps) => {
       }
     })}>
       <Pagination paginateAllOnNoResults={true} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const OnMidPageWithEllipses = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 10,
@@ -56,13 +56,13 @@ export const OnMidPageWithEllipses = (args: PaginationProps) => {
       }
     })}>
       <Pagination {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const OnMidPage = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 7,
@@ -71,13 +71,13 @@ export const OnMidPage = (args: PaginationProps) => {
       }
     })}>
       <Pagination {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const OnLastPage = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 7,
@@ -86,13 +86,13 @@ export const OnLastPage = (args: PaginationProps) => {
       }
     })}>
       <Pagination {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const Loading = (args: PaginationProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 7,
@@ -103,6 +103,6 @@ export const Loading = (args: PaginationProps) => {
       }
     })}>
       <Pagination {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

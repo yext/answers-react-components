@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { VerticalResults, VerticalResultsProps } from '../../src/components/VerticalResults';
-import { State, VerticalSearchState } from '@yext/answers-headless-react';
+import { State, VerticalSearchState } from '@yext/search-headless-react';
 import { StandardCard } from '../../src/components/cards/standard/StandardCard';
 import { mockAnswersState, mockAnswersHooks } from '../__utils__/mocks';
 import { mockedVerticalResults } from '../__fixtures__/data/vertical/results';
@@ -27,7 +27,7 @@ const mockedActions = {
   executeVerticalQuery: jest.fn()
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 beforeEach(() => {
   mockAnswersHooks({ mockedState, mockedActions });

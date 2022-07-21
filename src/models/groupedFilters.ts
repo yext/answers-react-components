@@ -1,4 +1,4 @@
-import { SelectableFilter as DisplayableFilter } from '@yext/answers-headless-react';
+import { SelectableFilter as DisplayableFilter } from '@yext/search-headless-react';
 
 /**
  * Types of filters (static, facet, and nlp) displayable by AppliedFilters.

@@ -1,4 +1,4 @@
-import { AutocompleteResult, Filter, FilterSearchResponse, SearchParameterField, useAnswersActions } from '@yext/answers-headless-react';
+import { AutocompleteResult, Filter, FilterSearchResponse, SearchParameterField, useSearchActions } from '@yext/search-headless-react';
 import { useCallback, useMemo, useState } from 'react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import { useSynchronizedRequest } from '../hooks/useSynchronizedRequest';
@@ -72,7 +72,7 @@ export function FilterSearch({
   sectioned = false,
   customCssClasses
 }: FilterSearchProps): JSX.Element {
-  const answersActions = useAnswersActions();
+  const searchActions = useSearchActions();
   const searchParamFields = searchFields.map((searchField) => {
     return { ...searchField, fetchEntities: false };
   });
@@ -82,7 +82,7 @@ export function FilterSearch({
     filterSearchResponse,
     executeFilterSearch
   ] = useSynchronizedRequest<string, FilterSearchResponse>(
-    inputValue => answersActions.executeFilterSearch(inputValue ?? '', sectioned, searchParamFields),
+    inputValue => searchActions.executeFilterSearch(inputValue ?? '', sectioned, searchParamFields),
     (e) => console.error('Error occured executing a filter search request.\n', e)
   );
 
@@ -98,16 +98,17 @@ export function FilterSearch({
     const newDisplayName = itemData?.displayName as string;
     if (newFilter && newDisplayName) {
       if (currentFilter) {
-        answersActions.setFilterOption({ ...currentFilter, selected: false });
+        searchActions.setFilterOption({ ...currentFilter, selected: false });
       }
-      answersActions.setFilterOption({ ...newFilter, displayName: newDisplayName, selected: true });
+      searchActions.setFilterOption({ ...newFilter, displayName: newDisplayName, selected: true });
       setCurrentFilter(newFilter);
-      answersActions.setOffset(0);
       if (select && searchOnSelect) {
-        executeSearch(answersActions);
+        searchActions.setOffset(0);
+        searchActions.resetFacets();
+        executeSearch(searchActions);
       }
     }
-  }, [answersActions, currentFilter, searchOnSelect]);
+  }, [searchActions, currentFilter, searchOnSelect]);
 
   const handleSelectDropdown = useCallback((_value, _index, itemData) => {
     handleDropdownEvent(itemData, true);

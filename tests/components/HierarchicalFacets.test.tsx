@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { FiltersState, Matcher, Source, State } from '@yext/answers-headless-react';
+import { FiltersState, Matcher, Source, State } from '@yext/search-headless-react';
 import { spyOnActions, mockAnswersState, mockAnswersHooks } from '../__utils__/mocks';
 import userEvent from '@testing-library/user-event';
 import { HierarchicalFacets } from '../../src';
@@ -38,7 +38,7 @@ const mockedActions = {
   setStaticFilters: jest.fn()
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('Hierarchical facets', () => {
   beforeEach(() => {

@@ -1,10 +1,10 @@
 import { CloseIcon } from '../icons/CloseIcon';
 import {
-  useAnswersActions,
+  useSearchActions,
   SelectableFilter as DisplayableFilter,
-  useAnswersState,
+  useSearchState,
   SearchTypeEnum,
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 import { isNearFilterValue } from '../utils/filterutils';
 import { AppliedFiltersCssClasses } from './AppliedFilters';
 import { DisplayableHierarchicalFacet } from '../models/groupedFilters';
@@ -46,20 +46,20 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
     hierarchicalFacetsDelimiter = DEFAULT_HIERARCHICAL_DELIMITER,
     cssClasses = {}
   } = props;
-  const answersActions = useAnswersActions();
-  const isVertical = useAnswersState(state => state.meta.searchType) === SearchTypeEnum.Vertical;
+  const searchActions = useSearchActions();
+  const isVertical = useSearchState(state => state.meta.searchType) === SearchTypeEnum.Vertical;
 
   const handleClickClearAllButton = useCallback(() => {
-    answersActions.setOffset(0);
-    answersActions.resetFacets();
-    answersActions.setStaticFilters(staticFilters.map(f => {
+    searchActions.setOffset(0);
+    searchActions.resetFacets();
+    searchActions.setStaticFilters(staticFilters.map(f => {
       return {
         ...f,
         selected: false
       };
     }));
-    executeSearch(answersActions);
-  }, [answersActions, staticFilters]);
+    executeSearch(searchActions);
+  }, [searchActions, staticFilters]);
 
   const hasAppliedFilters = (
     nlpFilters.length + staticFilters.length + facets.length + hierarchicalFacets.length) > 0;
@@ -73,9 +73,9 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
       console.error('A Filter with a NearFilterValue is not a supported RemovableFilter.');
       return;
     }
-    answersActions.setOffset(0);
-    answersActions.setFacetOption(fieldId, { matcher, value }, false);
-    executeSearch(answersActions);
+    searchActions.setOffset(0);
+    searchActions.setFacetOption(fieldId, { matcher, value }, false);
+    executeSearch(searchActions);
   };
 
   const handleRemoveHierarchicalFacetOption = (facet: DisplayableHierarchicalFacet) => {
@@ -86,7 +86,7 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
       .filter(hierarchicalFacet => hierarchicalFacet.fieldId === fieldId)
       .forEach(hierarchicalFacet => {
         if (isDescendantHierarchicalFacet(facet, hierarchicalFacet, hierarchicalFacetsDelimiter)) {
-          answersActions.setFacetOption(fieldId, {
+          searchActions.setFacetOption(fieldId, {
             matcher: hierarchicalFacet.matcher,
             value: hierarchicalFacet.value
           }, false);
@@ -97,20 +97,20 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
     const parentFacet = hierarchicalFacets
       .find(hierarchicalFacet => hierarchicalFacet.displayName === parentDisplayName);
 
-    parentFacet && answersActions.setFacetOption(fieldId, {
+    parentFacet && searchActions.setFacetOption(fieldId, {
       matcher: parentFacet?.matcher,
       value: parentFacet?.value
     }, true);
 
-    answersActions.setOffset(0);
-    answersActions.setFacetOption(fieldId, { matcher: facet.matcher, value: facet.value }, false);
-    executeSearch(answersActions);
+    searchActions.setOffset(0);
+    searchActions.setFacetOption(fieldId, { matcher: facet.matcher, value: facet.value }, false);
+    executeSearch(searchActions);
   };
 
   const handleRemoveStaticFilterOption = (filter: DisplayableFilter) => {
-    answersActions.setOffset(0);
-    answersActions.setFilterOption({ ...filter, selected: false });
-    executeSearch(answersActions);
+    searchActions.setOffset(0);
+    searchActions.setFilterOption({ ...filter, selected: false });
+    executeSearch(searchActions);
   };
 
   const renderRemovableFilter =

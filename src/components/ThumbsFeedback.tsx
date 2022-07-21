@@ -1,4 +1,4 @@
-import { useAnswersState } from '@yext/answers-headless-react';
+import { useSearchState } from '@yext/search-headless-react';
 import { useCallback, useState } from 'react';
 import { ThumbIcon } from '../icons/ThumbIcon';
 import useLayoutEffect from 'use-isomorphic-layout-effect';
@@ -59,7 +59,7 @@ export function ThumbsFeedback(props: ThumbsFeedbackProps): JSX.Element {
     feedbackTextOnSubmission = 'Thank you for your feedback!',
   } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
-  const query = useAnswersState(state => state.query.mostRecentSearch);
+  const query = useSearchState(state => state.query.mostRecentSearch);
   const [isFeedbackProvided, setIsFeedbackProvided] = useState(false);
 
   const handleClickThumbsUp = useCallback(() => {

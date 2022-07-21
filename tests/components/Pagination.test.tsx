@@ -1,5 +1,5 @@
 import { render, screen, within } from '@testing-library/react';
-import { State, VerticalSearchState } from '@yext/answers-headless-react';
+import { State, VerticalSearchState } from '@yext/search-headless-react';
 import { spyOnActions, mockAnswersState, mockAnswersHooks } from '../__utils__/mocks';
 import userEvent from '@testing-library/user-event';
 import { Pagination } from '../../src/components/Pagination';
@@ -21,7 +21,7 @@ const mockedActions = {
   executeVerticalQuery: jest.fn()
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 beforeEach(() => {
   mockAnswersHooks({ mockedState, mockedActions });

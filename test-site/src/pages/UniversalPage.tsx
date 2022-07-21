@@ -1,4 +1,4 @@
-import { provideAnswersHeadless, useAnswersActions } from '@yext/answers-headless-react';
+import { provideHeadless, useSearchActions } from '@yext/search-headless-react';
 import {
   DirectAnswer,
   DropdownItem,
@@ -7,14 +7,14 @@ import {
   SpellCheck,
   UniversalResults,
   VisualAutocompleteConfig
-} from '@yext/answers-react-components';
+} from '@yext/search-ui-react';
 import classNames from 'classnames';
 import { useLayoutEffect } from 'react';
 import { config } from '../config';
 
 
 const visualAutocompleteConfig: VisualAutocompleteConfig = {
-  entityPreviewSearcher: provideAnswersHeadless({
+  entityPreviewSearcher: provideHeadless({
     ...config,
     headlessId: 'visual-autocomplete'
   }),
@@ -53,9 +53,10 @@ const customSearchBarCss = {
 };
 
 export default function UniversalPage(): JSX.Element {
-  const answersActions = useAnswersActions();
+  const searchActions = useSearchActions();
   useLayoutEffect(() => {
-    answersActions.setUniversal();
+    searchActions.setUniversal();
+    searchActions.executeUniversalQuery();
   });
 
   return (

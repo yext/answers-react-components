@@ -1,7 +1,7 @@
 import { AppliedFiltersCssClasses } from '../AppliedFilters';
 import { AppliedFiltersDisplay } from '../AppliedFiltersDisplay';
 import { CollectionIcon } from '../../icons/CollectionIcon';
-import { AppliedQueryFilter, SelectableFilter as DisplayableFilter, useAnswersState } from '@yext/answers-headless-react';
+import { AppliedQueryFilter, SelectableFilter as DisplayableFilter, useSearchState } from '@yext/search-headless-react';
 import classNames from 'classnames';
 import { useAnalytics } from '../../hooks/useAnalytics';
 import { VerticalLink } from '../../models/verticalLink';
@@ -67,7 +67,7 @@ export function SectionHeader(props: SectionHeaderProps): JSX.Element {
     cssClasses = FALLBACK_CSS_CLASSES,
     getViewAllUrl
   } = props;
-  const latestQuery = useAnswersState(state => state.query.mostRecentSearch);
+  const latestQuery = useSearchState(state => state.query.mostRecentSearch);
   const nlpFilters = appliedQueryFilters?.map(
     (appliedQueryFilter): DisplayableFilter => ({
       ...appliedQueryFilter.filter,
@@ -77,9 +77,9 @@ export function SectionHeader(props: SectionHeaderProps): JSX.Element {
   ) ?? [];
 
   const analytics = useAnalytics();
-  const queryId = useAnswersState(state => state.query.queryId);
+  const queryId = useSearchState(state => state.query.queryId);
 
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
   cssClasses.appliedFiltersContainer = classNames(cssClasses.appliedFiltersContainer, {
     [cssClasses.appliedFiltersLoading ?? '']: isLoading
   });

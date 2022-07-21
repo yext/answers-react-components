@@ -1,4 +1,4 @@
-import { AllResultsForVertical, Source, VerticalResults, VerticalSearchState } from '@yext/answers-headless-react';
+import { AllResultsForVertical, Source, VerticalResults, VerticalSearchState } from '@yext/search-headless-react';
 
 export const alternativeVerticals: VerticalResults[] = [
   {

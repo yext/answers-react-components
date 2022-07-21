@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Map, MapboxOptions, MarkerOptions } from 'mapbox-gl';
-import { Result } from '@yext/answers-headless-react';
+import { Result } from '@yext/search-headless-react';
 /**
  * Interface for customizing the {@link Mapbox} map derived from Mapbox API's Map options.
  * The "container" field is set internally.

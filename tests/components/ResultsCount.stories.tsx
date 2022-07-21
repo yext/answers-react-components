@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext } from '@yext/answers-headless-react';
+import { SearchHeadlessContext } from '@yext/search-headless-react';
 
 import { ResultsCount, ResultsCountProps } from '../../src/components/ResultsCount';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { VerticalSearcherState } from '../__fixtures__/headless-state';
 
 const meta: ComponentMeta<typeof ResultsCount> = {
@@ -15,33 +15,33 @@ export default meta;
 
 export const Primary = (args: ResultsCountProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 5
       }
     })}>
       <ResultsCount {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const PaginationRange = (args: ResultsCountProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 30
       }
     })}>
       <ResultsCount {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const Loading = (args: ResultsCountProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       vertical: {
         resultsCount: 5
@@ -51,6 +51,6 @@ export const Loading = (args: ResultsCountProps) => {
       }
     })}>
       <ResultsCount {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

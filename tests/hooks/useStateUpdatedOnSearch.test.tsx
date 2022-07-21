@@ -1,5 +1,5 @@
 import { render, screen, act } from '@testing-library/react';
-import { AnswersHeadlessProvider, useAnswersActions } from '@yext/answers-headless-react';
+import { SearchHeadlessProvider, useSearchActions } from '@yext/search-headless-react';
 import { useStateUpdatedOnSearch } from '../../src/hooks/useStateUpdatedOnSearch';
 
 it('uses the correct initial value', () => {
@@ -16,7 +16,7 @@ describe('updates correctly', () => {
     let actions;
     const TestComponent = () => {
       const query = useStateUpdatedOnSearch(state => state.query.input) ?? '__';
-      actions = useAnswersActions();
+      actions = useSearchActions();
 
       return <div data-testid='query'>{query}</div>;
     };
@@ -60,14 +60,14 @@ function renderWithProvider(testJsx) {
     verticalKey: 'initialVerticalKey',
     // A unique headlessId is necessary every time a new test is run
     // Otherwise, the same headless instance will be returned,
-    // even with different usages of AnswersHeadlessProvider.
+    // even with different usages of SearchHeadlessProvider.
     headlessId: headlessIdCounter.toString()
   };
   headlessIdCounter++;
 
   render(
-    <AnswersHeadlessProvider {...config}>
+    <SearchHeadlessProvider {...config}>
       {testJsx}
-    </AnswersHeadlessProvider>
+    </SearchHeadlessProvider>
   );
 }

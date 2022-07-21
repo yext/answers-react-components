@@ -1,7 +1,7 @@
 import { FacetsProvider } from './Filters';
 import { FilterGroup, FilterGroupCssClasses } from './FilterGroup';
 import { Fragment } from 'react';
-import { DisplayableFacet } from '@yext/answers-headless-react';
+import { DisplayableFacet } from '@yext/search-headless-react';
 
 /**
  * The CSS class interface for {@link StandardFacets}.
@@ -32,6 +32,11 @@ export interface StandardFacetsProps {
   searchOnChange?: boolean,
   /** List of filter ids that should not be displayed. */
   excludedFieldIds?: string[],
+  /**
+   * Whether or not to show the option counts for each filter.
+   * Defaults to true.
+   */
+  showOptionCounts?: boolean,
   /** CSS classes for customizing the component styling. */
   customCssClasses?: StandardFacetsCssClasses
 }
@@ -50,7 +55,13 @@ export interface StandardFacetsProps {
  * @public
  */
 export function StandardFacets(props: StandardFacetsProps) {
-  const { searchOnChange, excludedFieldIds = [], customCssClasses = {}, ...filterGroupProps } = props;
+  const {
+    searchOnChange,
+    excludedFieldIds = [],
+    customCssClasses = {},
+    showOptionCounts = true,
+    ...filterGroupProps
+  } = props;
   return (
     <FacetsProvider searchOnChange={searchOnChange} className={customCssClasses.standardFacetsContainer}>
       {facets => facets
@@ -61,7 +72,7 @@ export function StandardFacets(props: StandardFacetsProps) {
               <FilterGroup
                 fieldId={f.fieldId}
                 filterOptions={f.options.map(o => {
-                  return { ...o, resultsCount: o.count };
+                  return showOptionCounts ? { ...o, resultsCount: o.count } : o;
                 })}
                 title={f.displayName}
                 customCssClasses={customCssClasses}

@@ -1,8 +1,8 @@
 import {
-  AnswersActions,
+  SearchActions,
   LatLong,
   SearchIntent,
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 
 let isFetching = false;
 let userLocation: LatLong = {
@@ -11,12 +11,12 @@ let userLocation: LatLong = {
 };
 
 export async function updateLocationIfNeeded(
-  answersActions: AnswersActions,
+  searchActions: SearchActions,
   intents: SearchIntent[],
   _geolocationOptions?: PositionOptions
 ): Promise<void> {
-  if (intents.includes(SearchIntent.NearMe) && !answersActions.state.location.userLocation && !isFetching) {
-    answersActions.setUserLocation(userLocation);
+  if (intents.includes(SearchIntent.NearMe) && !searchActions.state.location.userLocation && !isFetching) {
+    searchActions.setUserLocation(userLocation);
   }
 }
 

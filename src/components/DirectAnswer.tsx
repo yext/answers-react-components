@@ -1,4 +1,4 @@
-import { useAnswersState, DirectAnswerType, DirectAnswer as DirectAnswerData } from '@yext/answers-headless-react';
+import { useSearchState, DirectAnswerType, DirectAnswer as DirectAnswerData } from '@yext/search-headless-react';
 import { renderHighlightedValue } from './utils/renderHighlightedValue';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
@@ -51,7 +51,7 @@ const builtInCssClasses: Readonly<DirectAnswerCssClasses> = {
 };
 
 /**
- * Renders Direct Answers provided by the Answers API.
+ * Renders Direct Answers provided by the Search API.
  *
  * @public
  *
@@ -59,8 +59,8 @@ const builtInCssClasses: Readonly<DirectAnswerCssClasses> = {
  * @returns A react element for DirectAnswer
  */
 export function DirectAnswer(props: DirectAnswerProps): JSX.Element | null {
-  const directAnswerResult = useAnswersState(state => state.directAnswer.result);
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading || false);
+  const directAnswerResult = useSearchState(state => state.directAnswer.result);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading || false);
   const composedCssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
 
   const handleClickViewDetails = useCardAnalyticsCallback(directAnswerResult as DirectAnswerData, 'CTA_CLICK');

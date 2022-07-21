@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AnswersHeadless, DisplayableFacetOption, FacetOption, Source, State } from '@yext/answers-headless-react';
+import { DisplayableFacetOption, FacetOption, Source, State, SearchActions } from '@yext/search-headless-react';
 import { mockAnswersHooks, spyOnActions } from '../__utils__/mocks';
 import userEvent from '@testing-library/user-event';
 import { DisplayableFacets } from '../__fixtures__/data/filters';
@@ -37,7 +37,7 @@ const mockedUtils = {
   isCloseMatch: () => true
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('StandardFacets', () => {
   beforeEach(() => {
@@ -73,6 +73,19 @@ describe('StandardFacets', () => {
 
     userEvent.click(coffeeCheckbox);
     expectFacetOptionSet(actions, productFacet.fieldId, productFacet.options[0], true);
+  });
+
+  it('Does not display option counts if showOptionCounts is set to false', () => {
+    render(<StandardFacets showOptionCounts={false}/>);
+
+    const facets = DisplayableFacets[0];
+    const coffeeLabel = screen.queryByLabelText(facets.options[0].displayName);
+    const coffeeLabelAndCount = screen.queryByLabelText(
+      getOptionLabelText(facets.options[0])
+    );
+
+    expect(coffeeLabel).toBeDefined();
+    expect(coffeeLabelAndCount).toBeNull();
   });
 
   it('Clicking an unselected facet option label selects it', () => {
@@ -134,7 +147,7 @@ describe('StandardFacets', () => {
 });
 
 function expectFacetOptionSet(
-  actions: AnswersHeadless,
+  actions: SearchActions,
   fieldId: string,
   option: FacetOption,
   selected: boolean

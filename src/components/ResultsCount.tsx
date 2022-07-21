@@ -1,9 +1,9 @@
 import {
   SearchTypeEnum,
-  useAnswersState,
+  useSearchState,
   VerticalResults,
   VerticalSearchState
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 import classNames from 'classnames';
 import { processTranslation } from './utils/processTranslation';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
@@ -42,7 +42,7 @@ const builtInCssClasses: Readonly<ResultsCountCssClasses> = {
  */
 export function ResultsCount({ customCssClasses }: ResultsCountProps): JSX.Element | null {
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses);
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
   const resultsCountText = useResultsCount();
 
   const resultsCountClassnames = classNames(cssClasses.resultsCountContainer, {
@@ -55,10 +55,10 @@ export function ResultsCount({ customCssClasses }: ResultsCountProps): JSX.Eleme
  * Generates a string for the results count of the recent universal/vertical search.
  */
 function useResultsCount() {
-  const isVertical = useAnswersState(state => state.meta.searchType) === SearchTypeEnum.Vertical;
-  const results = useAnswersState(state => isVertical ? state.vertical : state.universal.verticals);
-  const offset = useAnswersState(state => state.vertical.offset) || 0;
-  const limit = useAnswersState(state => state.vertical.limit) || 20;
+  const isVertical = useSearchState(state => state.meta.searchType) === SearchTypeEnum.Vertical;
+  const results = useSearchState(state => isVertical ? state.vertical : state.universal.verticals);
+  const offset = useSearchState(state => state.vertical.offset) || 0;
+  const limit = useSearchState(state => state.vertical.limit) || 20;
   let resultsCount = 0;
   if (results) {
     if (isUniversalSearchResults(results)) {

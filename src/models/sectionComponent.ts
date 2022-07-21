@@ -1,4 +1,4 @@
-import { Result } from '@yext/answers-headless-react';
+import { Result } from '@yext/search-headless-react';
 import { CardComponent } from './cardComponent';
 
 /**

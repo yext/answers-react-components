@@ -2,7 +2,7 @@ import {
   AppliedQueryFilter,
   FiltersState,
   SelectableFilter as DisplayableFilter
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 import { DisplayableHierarchicalFacet, GroupedFilters } from '../models/groupedFilters';
 import { getDisplayableFacets, getDisplayableHierarchicalFacets, getDisplayableNlpFilters } from './displayablefilterutils';
 import { isDuplicateFilter } from './filterutils';

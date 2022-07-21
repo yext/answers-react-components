@@ -1,4 +1,4 @@
-import { useAnswersState } from '@yext/answers-headless-react';
+import { useSearchState } from '@yext/search-headless-react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import { pruneAppliedFilters } from '../utils/appliedfilterutils';
 import { useMemo } from 'react';
@@ -58,9 +58,9 @@ export interface AppliedFiltersProps {
  * @returns A React element for the applied filters
  */
 export function AppliedFilters(props: AppliedFiltersProps): JSX.Element {
-  const nlpFilters = useAnswersState(state => state.vertical.appliedQueryFilters);
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
-  const hasResults = !!useAnswersState(state => state.vertical.results);
+  const nlpFilters = useSearchState(state => state.vertical.appliedQueryFilters);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
+  const hasResults = !!useSearchState(state => state.vertical.results);
   const filters = useStateUpdatedOnSearch(state => state.filters);
 
   const {

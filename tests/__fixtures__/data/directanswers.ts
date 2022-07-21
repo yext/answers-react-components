@@ -1,4 +1,4 @@
-import { DirectAnswerState, DirectAnswerType } from '@yext/answers-headless-react';
+import { DirectAnswerState, DirectAnswerType } from '@yext/search-headless-react';
 import { RecursivePartial } from '../../__utils__/mocks';
 
 export const featuredSnippetDAState: RecursivePartial<DirectAnswerState> = {

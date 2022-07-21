@@ -1,4 +1,4 @@
-import { Matcher, NumberRangeValue, useAnswersActions, useAnswersState } from '@yext/answers-headless-react';
+import { Matcher, NumberRangeValue, useSearchActions, useSearchState } from '@yext/search-headless-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useFilterGroupContext } from './FilterGroupContext';
 import { useComposedCssClasses } from '../../hooks/useComposedCssClasses';
@@ -70,14 +70,14 @@ const builtInCssClasses: Readonly<RangeInputCssClasses> = {
   input___valid: 'border-gray-300 focus:border-primary',
   input___invalid: 'border-red-700 focus:border-red-700',
   inputContainer: 'relative',
-  inputRowContainer: 'flex flex-row items-center space-x-3 peer',
+  inputRowContainer: 'flex flex-row items-center space-x-3 group',
   buttonsContainer: 'flex flex-row items-center justify-between pt-2',
   inputPrefix: 'absolute left-2 top-2 text-sm',
   inputPrefix___disabled: 'text-neutral-light cursor-not-allowed',
   inputPrefix___enabled: 'text-neutral',
   applyButton: 'text-sm text-primary font-medium',
   clearButton: 'text-sm text-neutral font-medium',
-  tooltipContainer: 'invisible peer-hover:visible relative -right-60 -top-10',
+  tooltipContainer: 'invisible group-hover:visible relative -top-6',
   tooltip: 'absolute z-10 left-0 whitespace-nowrap rounded shadow-lg p-3 text-sm bg-neutral-dark text-white',
   invalidMessage: 'pl-3 text-sm text-red-700',
   invalidRowContainer: 'pt-2 flex flex-row items-center'
@@ -98,10 +98,10 @@ export function RangeInput(props: RangeInputProps): JSX.Element | null {
     inputPrefix
   } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
-  const answersActions = useAnswersActions();
+  const searchActions = useSearchActions();
   const [minRangeInput, setMinRangeInput] = useState<string>('');
   const [maxRangeInput, setMaxRangeInput] = useState<string>('');
-  const staticFilters = useAnswersState(state => state.filters.static);
+  const staticFilters = useSearchState(state => state.filters.static);
   const isDisabled = filters.some(filter => filter.selected && filter.fieldId === fieldId);
 
   const rangeFilter: NumberRangeFilter = useMemo(() => {
@@ -142,28 +142,28 @@ export function RangeInput(props: RangeInputProps): JSX.Element | null {
       return;
     }
     const displayName = getFilterDisplayName(rangeFilter.value);
-    clearStaticRangeFilters(answersActions, new Set([fieldId]));
-    answersActions.setFilterOption({
+    clearStaticRangeFilters(searchActions, new Set([fieldId]));
+    searchActions.setFilterOption({
       ...rangeFilter,
       selected: true,
       displayName
     });
-    answersActions.setOffset(0);
-    executeSearch(answersActions);
-  }, [answersActions, fieldId, getFilterDisplayName, isValid, rangeFilter]);
+    searchActions.setOffset(0);
+    executeSearch(searchActions);
+  }, [searchActions, fieldId, getFilterDisplayName, isValid, rangeFilter]);
 
   const handleClickClear = useCallback(() => {
     const displayName = getFilterDisplayName(rangeFilter.value);
-    answersActions.setFilterOption({
+    searchActions.setFilterOption({
       ...rangeFilter,
       selected: false,
       displayName
     });
     setMinRangeInput('');
     setMaxRangeInput('');
-    answersActions.setOffset(0);
-    executeSearch(answersActions);
-  }, [answersActions, getFilterDisplayName, rangeFilter]);
+    searchActions.setOffset(0);
+    executeSearch(searchActions);
+  }, [searchActions, getFilterDisplayName, rangeFilter]);
 
   const inputClasses = classNames(cssClasses.input, {
     [cssClasses.input___withPrefix ?? '']: !!inputPrefix,
@@ -202,14 +202,14 @@ export function RangeInput(props: RangeInputProps): JSX.Element | null {
         {renderInput(minRangeInput, handleMinChange, 'Min')}
         <div className='w-2.5 text-sm text-neutral'>-</div>
         {renderInput(maxRangeInput, handleMaxChange, 'Max')}
-      </div>
-      {isDisabled &&
+        {isDisabled &&
         <div className={cssClasses.tooltipContainer}>
           <div className={cssClasses.tooltip}>
             Unselect an option to enter in a range.
           </div>
         </div>
-      }
+        }
+      </div>
       {!isValid &&
         <div className={cssClasses.invalidRowContainer}>
           <InvalidIcon/>

@@ -1,4 +1,4 @@
-import { FilterSearchResponse, Matcher } from '@yext/answers-headless-react';
+import { FilterSearchResponse, Matcher } from '@yext/search-headless-react';
 
 export const unlabeledFilterSearchResponse: FilterSearchResponse = {
   sections: [

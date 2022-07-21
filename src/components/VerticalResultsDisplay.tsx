@@ -1,6 +1,6 @@
 import { VerticalResultsCssClasses } from './VerticalResults';
 import { CardComponent } from '../models/cardComponent';
-import { Result } from '@yext/answers-headless-react';
+import { Result } from '@yext/search-headless-react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import classNames from 'classnames';
 

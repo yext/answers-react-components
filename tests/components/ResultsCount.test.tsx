@@ -1,4 +1,4 @@
-import { State } from '@yext/answers-headless-react';
+import { State } from '@yext/search-headless-react';
 import { render, screen } from '@testing-library/react';
 import { ResultsCount } from '../../src/components/ResultsCount';
 import { mockAnswersState } from '../__utils__/mocks';
@@ -81,7 +81,7 @@ const mockedStateVerticalPaginationResult: Partial<State> = {
   }
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('Results count for vertical search', () => {
   it('Displayed correctly for multiple results', () => {

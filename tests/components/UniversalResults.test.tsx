@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { UniversalResults } from '../../src/components/UniversalResults';
 
-import { State } from '@yext/answers-headless-react';
+import { State } from '@yext/search-headless-react';
 import { CtaData } from '../../src/models/StandardCardData';
 import { mockAnswersState } from '../__utils__/mocks';
 import { verticalResults } from '../__fixtures__/data/universalresults';
@@ -23,7 +23,7 @@ const mockedState: Partial<State> = {
   }
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('UniversalResults', () => {
   beforeEach(() => {

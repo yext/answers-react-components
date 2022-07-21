@@ -1,10 +1,10 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext } from '@yext/answers-headless-react';
+import { SearchHeadlessContext } from '@yext/search-headless-react';
 
 import { SpellCheck, SpellCheckProps } from '../../src/components/SpellCheck';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { VerticalSearcherState } from '../__fixtures__/headless-state';
 
 const meta: ComponentMeta<typeof SpellCheck> = {
@@ -15,8 +15,8 @@ export default meta;
 
 export const Primary = (args: SpellCheckProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(VerticalSearcherState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(VerticalSearcherState)}>
       <SpellCheck {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

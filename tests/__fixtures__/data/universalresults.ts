@@ -1,4 +1,4 @@
-import { Matcher, Source, VerticalResults } from '@yext/answers-headless-react';
+import { Matcher, Source, VerticalResults } from '@yext/search-headless-react';
 
 const vertical1: VerticalResults = {
   appliedQueryFilters: [{

@@ -18,7 +18,6 @@ interface DropdownItemData {
 export interface DropdownProps {
   screenReaderText: string,
   screenReaderInstructions?: string,
-  initialValue?: string,
   parentQuery?: string,
   onSelect?: (value: string, index: number, focusedItemData: Record<string, unknown> | undefined) => void,
   onToggle?: (
@@ -44,7 +43,6 @@ export function Dropdown(props: PropsWithChildren<DropdownProps>): JSX.Element {
     children,
     screenReaderText,
     screenReaderInstructions = 'When autocomplete results are available, use up and down arrows to review and enter to select.',
-    initialValue,
     onSelect,
     onToggle,
     className,
@@ -58,7 +56,7 @@ export function Dropdown(props: PropsWithChildren<DropdownProps>): JSX.Element {
   const [hasTyped, setHasTyped] = useState<boolean>(false);
   const [childrenWithDropdownItemsTransformed, items] = getTransformedChildrenAndItemData(children);
 
-  const inputContext = useInputContextInstance(initialValue);
+  const inputContext = useInputContextInstance();
   const { value, setValue, lastTypedOrSubmittedValue, setLastTypedOrSubmittedValue } = inputContext;
 
   const focusContext = useFocusContextInstance(
@@ -148,9 +146,9 @@ export function Dropdown(props: PropsWithChildren<DropdownProps>): JSX.Element {
   );
 }
 
-function useInputContextInstance(initialValue = ''): InputContextType {
-  const [value, setValue] = useState(initialValue);
-  const [lastTypedOrSubmittedValue, setLastTypedOrSubmittedValue] = useState(initialValue);
+function useInputContextInstance(): InputContextType {
+  const [value, setValue] = useState('');
+  const [lastTypedOrSubmittedValue, setLastTypedOrSubmittedValue] = useState('');
   return {
     value,
     setValue,

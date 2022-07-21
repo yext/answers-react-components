@@ -1,5 +1,5 @@
 import { CardComponent } from '../models/cardComponent';
-import { useAnswersState } from '@yext/answers-headless-react';
+import { useSearchState } from '@yext/search-headless-react';
 import { VerticalResultsDisplay } from './VerticalResultsDisplay';
 
 /**
@@ -39,10 +39,10 @@ export interface VerticalResultsProps {
  */
 export function VerticalResults(props: VerticalResultsProps): JSX.Element | null {
   const { displayAllOnNoResults = true, ...otherProps } = props;
-  const verticalResults = useAnswersState(state => state.vertical.results) || [];
+  const verticalResults = useSearchState(state => state.vertical.results) || [];
   const allResultsForVertical =
-    useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+    useSearchState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
 
   let results = verticalResults;
   if (verticalResults.length === 0 && displayAllOnNoResults) {

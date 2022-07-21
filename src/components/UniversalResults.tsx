@@ -1,4 +1,4 @@
-import { useAnswersState, VerticalResults as VerticalResultsData } from '@yext/answers-headless-react';
+import { useSearchState, VerticalResults as VerticalResultsData } from '@yext/search-headless-react';
 import { StandardSection } from './sections/StandardSection';
 import {
   SectionHeader,
@@ -54,8 +54,8 @@ export function UniversalResults({
   customCssClasses
 }: UniversalResultsProps): JSX.Element | null {
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses);
-  const resultsFromAllVerticals = useAnswersState(state => state?.universal?.verticals) || [];
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+  const resultsFromAllVerticals = useSearchState(state => state?.universal?.verticals) || [];
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
 
   if (resultsFromAllVerticals.length === 0) {
     return null;

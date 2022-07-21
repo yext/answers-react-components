@@ -1,4 +1,4 @@
-import { StateSelector, useAnswersState } from '@yext/answers-headless-react';
+import { StateSelector, useSearchState } from '@yext/search-headless-react';
 import { useRef } from 'react';
 
 /**
@@ -7,9 +7,9 @@ import { useRef } from 'react';
 export function useStateUpdatedOnSearch<T>(
   stateSelector: StateSelector<T>
 ): T | undefined {
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
   const wasLoading = useRef<boolean | undefined>(isLoading);
-  const currentState = useAnswersState(stateSelector);
+  const currentState = useSearchState(stateSelector);
   const snapshottedState = useRef<T>(currentState);
   if (!isLoading && wasLoading.current) {
     snapshottedState.current = currentState;

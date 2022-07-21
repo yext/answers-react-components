@@ -1,4 +1,4 @@
-import { useAnswersActions } from '@yext/answers-headless-react';
+import { useSearchActions } from '@yext/search-headless-react';
 import {
   AppliedFilters,
   ResultsCount,
@@ -8,13 +8,14 @@ import {
   LocationBias,
   NumericalFacets,
   Pagination
-} from '@yext/answers-react-components';
+} from '@yext/search-ui-react';
 import { useLayoutEffect } from 'react';
 
 export function ProductsPage() {
-  const answersActions = useAnswersActions();
+  const searchActions = useSearchActions();
   useLayoutEffect(() => {
-    answersActions.setVertical('products');
+    searchActions.setVertical('products');
+    searchActions.executeVerticalQuery();
   });
 
   return (

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 
 import { SpellCheck } from '../../src/components/SpellCheck';
-import { State } from '@yext/answers-headless-react';
+import { State } from '@yext/search-headless-react';
 import { mockAnswersHooks, spyOnActions } from '../__utils__/mocks';
 import userEvent from '@testing-library/user-event';
 
@@ -21,7 +21,7 @@ const mockedState: Partial<State> = {
   }
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('SpellCheck', () => {
   beforeEach(() => {

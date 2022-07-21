@@ -1,4 +1,4 @@
-import { DisplayableFacet, Matcher, SelectableFilter as DisplayableFilter } from '@yext/answers-headless-react';
+import { DisplayableFacet, Matcher, SelectableFilter as DisplayableFilter } from '@yext/search-headless-react';
 import { DisplayableHierarchicalFacet } from '../../../src/models/groupedFilters';
 
 export const DisplayableFilters: DisplayableFilter[] = [

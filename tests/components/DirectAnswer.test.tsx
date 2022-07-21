@@ -1,12 +1,12 @@
 import { render, screen } from '@testing-library/react';
-import { DirectAnswerState } from '@yext/answers-headless-react';
+import { DirectAnswerState } from '@yext/search-headless-react';
 import { useAnalytics } from '../../src/hooks/useAnalytics';
 import { DirectAnswer } from '../../src/components/DirectAnswer';
 import { RecursivePartial, mockAnswersState } from '../__utils__/mocks';
 import { fieldValueDAState, featuredSnippetDAState } from '../__fixtures__/data/directanswers';
 import userEvent from '@testing-library/user-event';
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 jest.mock('../../src/hooks/useAnalytics', () => {
   const report = jest.fn();

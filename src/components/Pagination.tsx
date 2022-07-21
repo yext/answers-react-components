@@ -1,4 +1,4 @@
-import { useAnswersState, useAnswersActions } from '@yext/answers-headless-react';
+import { useSearchState, useSearchActions } from '@yext/search-headless-react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import { ChevronIcon as PageNavigationIcon } from '../icons/ChevronIcon';
 import { usePaginationAnalytics } from '../hooks/usePaginationAnalytics';
@@ -56,29 +56,29 @@ const builtInPaginationCssClasses: Readonly<PaginationCssClasses> = {
 export function Pagination(props: PaginationProps): JSX.Element | null {
   const { customCssClasses = {}, paginateAllOnNoResults = false } = props;
   const cssClasses = useComposedCssClasses(builtInPaginationCssClasses, customCssClasses);
-  const answersActions = useAnswersActions();
-  const verticalResultsCount = useAnswersState(state => state.vertical.resultsCount) || 0;
+  const searchActions = useSearchActions();
+  const verticalResultsCount = useSearchState(state => state.vertical.resultsCount) || 0;
   const allResultsCountForVertical =
-    useAnswersState(state => state.vertical?.noResults?.allResultsForVertical.resultsCount) || 0;
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+    useSearchState(state => state.vertical?.noResults?.allResultsForVertical.resultsCount) || 0;
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
 
   let resultsCount = verticalResultsCount;
   if (verticalResultsCount === 0 && paginateAllOnNoResults) {
     resultsCount = allResultsCountForVertical;
   }
 
-  const offset = useAnswersState(state => state.vertical.offset) || 0;
-  const limit = useAnswersState(state => state.vertical.limit) || 20;
+  const offset = useSearchState(state => state.vertical.offset) || 0;
+  const limit = useSearchState(state => state.vertical.limit) || 20;
   const currentPageNumber = (offset / limit) + 1;
   const maxPageCount = Math.ceil(resultsCount / limit);
 
   const reportAnalyticsEvent = usePaginationAnalytics();
   const navigateToPage = useCallback((newPageNumber: number) => {
     const newOffset = limit * (newPageNumber - 1);
-    answersActions.setOffset(newOffset);
-    executeSearch(answersActions);
+    searchActions.setOffset(newOffset);
+    executeSearch(searchActions);
     reportAnalyticsEvent(newPageNumber, currentPageNumber, maxPageCount);
-  }, [answersActions, limit, maxPageCount, currentPageNumber, reportAnalyticsEvent]);
+  }, [searchActions, limit, maxPageCount, currentPageNumber, reportAnalyticsEvent]);
 
   if (maxPageCount <= 1) {
     return null;

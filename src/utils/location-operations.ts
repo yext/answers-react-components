@@ -1,7 +1,7 @@
 import {
-  AnswersActions,
+  SearchActions,
   SearchIntent,
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 
 const defaultGeolocationOptions: PositionOptions = {
   enableHighAccuracy: false,
@@ -16,14 +16,14 @@ const defaultGeolocationOptions: PositionOptions = {
  * @public
  */
 export async function updateLocationIfNeeded(
-  answersActions: AnswersActions,
+  searchActions: SearchActions,
   intents: SearchIntent[],
   geolocationOptions?: PositionOptions
 ): Promise<void> {
-  if (intents.includes(SearchIntent.NearMe) && !answersActions.state.location.userLocation) {
+  if (intents.includes(SearchIntent.NearMe) && !searchActions.state.location.userLocation) {
     try {
       const position = await getUserLocation(geolocationOptions);
-      answersActions.setUserLocation({
+      searchActions.setUserLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });

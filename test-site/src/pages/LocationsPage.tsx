@@ -1,4 +1,4 @@
-import { useAnswersActions } from '@yext/answers-headless-react';
+import { useAnswersActions } from '@yext/search-headless-react';
 import {
   AppliedFilters,
   ResultsCount,

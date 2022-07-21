@@ -1,4 +1,4 @@
-import { AnswersHeadlessProvider } from '@yext/answers-headless-react';
+import { SearchHeadlessProvider } from '@yext/search-headless-react';
 import { Navbar } from './components/Navbar';
 import { PeoplePage } from './pages/PeoplePage';
 import { ProductsPage } from './pages/ProductsPage';
@@ -9,13 +9,13 @@ import {
   Route,
   Routes,
 } from 'react-router-dom';
-import { AnalyticsProvider } from '@yext/answers-react-components';
+import { AnalyticsProvider } from '@yext/search-ui-react';
 import { config } from './config';
 
 function App() {
   return (
     <div className='p-4'>
-      <AnswersHeadlessProvider {...config}>
+      <SearchHeadlessProvider {...config}>
         <AnalyticsProvider {...config}>
           <BrowserRouter>
             <Navbar/>
@@ -27,7 +27,7 @@ function App() {
             </Routes>
           </BrowserRouter>
         </AnalyticsProvider>
-      </AnswersHeadlessProvider>
+      </SearchHeadlessProvider>
     </div>
   );
 }

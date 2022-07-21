@@ -1,11 +1,11 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, LocationBiasMethod } from '@yext/answers-headless-react';
+import { SearchHeadlessContext, LocationBiasMethod } from '@yext/search-headless-react';
 
 import { LocationBias, LocationBiasProps } from '../../src/components/LocationBias';
 
 import { decorator as LocationOperationDecorator } from '../__fixtures__/utils/location-operations';
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { VerticalSearcherState } from '../__fixtures__/headless-state';
 import { userEvent, within } from '@storybook/testing-library';
 
@@ -31,12 +31,12 @@ const mockedLocationData = {
 
 export const Primary = (args: LocationBiasProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...VerticalSearcherState,
       location: mockedLocationData
     })}>
       <LocationBias {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 

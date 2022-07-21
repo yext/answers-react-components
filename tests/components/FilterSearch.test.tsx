@@ -2,15 +2,16 @@ import { FilterSearch } from '../../src/components/FilterSearch';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import * as searchOperations from '../../src/utils/search-operations';
-import { mockAnswersActions, spyOnActions } from '../__utils__/mocks';
+import { mockSearchActions, spyOnActions } from '../__utils__/mocks';
 import { labeledFilterSearchResponse, unlabeledFilterSearchResponse, noResultsFilterSearchResponse } from '../../tests/__fixtures__/data/filtersearch';
-import { Matcher } from '@yext/answers-headless-react';
+import { Matcher } from '@yext/search-headless-react';
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 const actions = spyOnActions();
 
 const setFilterOption = jest.fn();
 const setOffset = jest.fn();
+const resetFacets = jest.fn();
 const searchFieldsProp = [{
   fieldApiName: 'name',
   entityType: 'ce_person'
@@ -18,9 +19,10 @@ const searchFieldsProp = [{
 
 describe('search with section labels', () => {
   beforeEach(() => {
-    mockAnswersActions({
+    mockSearchActions({
       setFilterOption,
       setOffset,
+      resetFacets,
       executeFilterSearch: jest.fn().mockResolvedValue(labeledFilterSearchResponse)
     });
   });
@@ -174,12 +176,15 @@ describe('search with section labels', () => {
         expect(setFilterOption).toBeCalledWith(expectedSetFilterOptionParam);
       });
       expect(setOffset).toBeCalledWith(expectedSetOffsetParam);
+      expect(resetFacets).toBeCalled();
 
       const setFilterOptionCallOrder = setFilterOption.mock.invocationCallOrder[0];
       const setOffsetCallOrder = setOffset.mock.invocationCallOrder[0];
+      const resetFacetsCallOrder = resetFacets.mock.invocationCallOrder[0];
       const mockExecuteSearchCallOrder = mockExecuteSearch.mock.invocationCallOrder[0];
       expect(setFilterOptionCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
       expect(setOffsetCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
+      expect(resetFacetsCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
     });
 
     it('does not trigger a search on pressing "enter" if no autocomplete result is selected', async () => {
@@ -193,6 +198,7 @@ describe('search with section labels', () => {
         expect(setFilterOption).not.toBeCalled();
       });
       expect(setOffset).not.toBeCalled();
+      expect(resetFacets).not.toBeCalled();
       expect(mockExecuteSearch).not.toBeCalled();
     });
 
@@ -216,12 +222,15 @@ describe('search with section labels', () => {
       userEvent.click(autocompleteSuggestion);
       expect(setFilterOption).toBeCalledWith(expectedSetFilterOptionParam);
       expect(setOffset).toBeCalledWith(expectedSetOffsetParam);
+      expect(resetFacets).toBeCalled();
 
       const setFilterOptionCallOrder = setFilterOption.mock.invocationCallOrder[0];
       const setOffsetCallOrder = setOffset.mock.invocationCallOrder[0];
+      const resetFacetsCallOrder = setOffset.mock.invocationCallOrder[0];
       const mockExecuteSearchCallOrder = mockExecuteSearch.mock.invocationCallOrder[0];
       expect(setFilterOptionCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
       expect(setOffsetCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
+      expect(resetFacetsCallOrder).toBeLessThan(mockExecuteSearchCallOrder);
     });
   });
 
@@ -244,7 +253,8 @@ describe('search with section labels', () => {
           selected: true
         });
       });
-      expect(setOffset).toBeCalledWith(0);
+      expect(setOffset).not.toHaveBeenCalled();
+      expect(resetFacets).not.toHaveBeenCalled();
       expect(mockExecuteSearch).not.toHaveBeenCalled();
     });
   });
@@ -252,7 +262,7 @@ describe('search with section labels', () => {
 
 describe('search without section labels', () => {
   it('shows autocomplete results, if they exist, when a character is typed', async () => {
-    mockAnswersActions({
+    mockSearchActions({
       executeFilterSearch: jest.fn().mockResolvedValue(unlabeledFilterSearchResponse)
     });
     jest.spyOn(searchOperations, 'executeSearch').mockImplementation();
@@ -270,7 +280,7 @@ describe('search without section labels', () => {
 
 describe('screen reader', () => {
   it('renders ScreenReader messages with section labels', async () => {
-    mockAnswersActions({
+    mockSearchActions({
       executeFilterSearch: jest.fn().mockResolvedValue(labeledFilterSearchResponse)
     });
 
@@ -286,7 +296,7 @@ describe('screen reader', () => {
   });
 
   it('renders ScreenReader messages without section labels', async () => {
-    mockAnswersActions({
+    mockSearchActions({
       executeFilterSearch: jest.fn().mockResolvedValue(unlabeledFilterSearchResponse)
     });
 
@@ -302,7 +312,7 @@ describe('screen reader', () => {
   });
 
   it('renders 0 results ScreenReader message when there are no results', async () => {
-    mockAnswersActions({
+    mockSearchActions({
       executeFilterSearch: jest.fn().mockResolvedValue(noResultsFilterSearchResponse)
     });
 

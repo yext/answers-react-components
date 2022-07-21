@@ -1,4 +1,4 @@
-import { DisplayableFacet, FacetOption } from '@yext/answers-headless-react';
+import { DisplayableFacet, FacetOption } from '@yext/search-headless-react';
 import { useMemo } from 'react';
 
 /**

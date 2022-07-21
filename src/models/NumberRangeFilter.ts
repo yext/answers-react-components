@@ -1,4 +1,4 @@
-import { Filter, Matcher, NumberRangeValue } from '@yext/answers-headless-react';
+import { Filter, Matcher, NumberRangeValue } from '@yext/search-headless-react';
 import { isNumberRangeValue } from '../utils/filterutils';
 
 export interface NumberRangeFilter extends Filter {

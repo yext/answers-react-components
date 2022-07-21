@@ -1,4 +1,4 @@
-import { State } from '@yext/answers-headless-react';
+import { State } from '@yext/search-headless-react';
 
 /* A sample State for a Vertical Searcher */
 export const VerticalSearcherState: State = {

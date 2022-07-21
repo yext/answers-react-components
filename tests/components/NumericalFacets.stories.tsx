@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, State } from '@yext/answers-headless-react';
+import { SearchHeadlessContext, State } from '@yext/search-headless-react';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { RecursivePartial } from '../__utils__/mocks';
 import { DisplayableFacets } from '../__fixtures__/data/filters';
 import { NumericalFacets, NumericalFacetsProps } from '../../src';
@@ -21,8 +21,8 @@ const mockedHeadlessState: RecursivePartial<State> = {
 
 export const Primary = (args: NumericalFacetsProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <NumericalFacets {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

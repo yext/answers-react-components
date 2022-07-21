@@ -3,8 +3,8 @@ import {
   DirectAnswerType,
   FieldValueDirectAnswer,
   Result,
-  useAnswersState
-} from '@yext/answers-headless-react';
+  useSearchState
+} from '@yext/search-headless-react';
 import { useCallback } from 'react';
 import { FeedbackType } from '../components/ThumbsFeedback';
 import { useAnalytics } from './useAnalytics';
@@ -32,8 +32,8 @@ export function useCardAnalytics(): (
   cardResult: Result | DirectAnswerData, analyticsEventType: CardAnalyticsType
 ) => void {
   const analytics = useAnalytics();
-  const verticalKey = useAnswersState(state => state.vertical.verticalKey);
-  const queryId = useAnswersState(state => state.query.queryId);
+  const verticalKey = useSearchState(state => state.vertical.verticalKey);
+  const queryId = useSearchState(state => state.query.queryId);
 
   const reportCtaEvent = useCallback((result: DirectAnswerData | Result, eventType: CardCtaEventType) => {
     let url: string | undefined, entityId: string | undefined, fieldName: string | undefined;

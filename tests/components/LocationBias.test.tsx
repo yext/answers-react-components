@@ -1,12 +1,12 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LocationBias } from '../../src/components/LocationBias';
-import { State, LocationBiasMethod } from '@yext/answers-headless-react';
+import { State, LocationBiasMethod } from '@yext/search-headless-react';
 import * as locationOperations from '../../src/utils/location-operations';
 import { mockAnswersHooks, mockAnswersState, spyOnActions } from '../__utils__/mocks';
 import * as searchOperations from '../../src/utils/search-operations';
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 const mockedStateVaDevice: Partial<State> = {
   location: {

@@ -1,4 +1,4 @@
-import { AutocompleteResult } from '@yext/answers-headless-react';
+import { AutocompleteResult } from '@yext/search-headless-react';
 import { renderHighlightedValue } from '../utils/renderHighlightedValue';
 
 /**

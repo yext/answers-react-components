@@ -1,9 +1,9 @@
 import {
   DisplayableFacet,
   SelectableFilter as DisplayableFilter,
-  useAnswersActions,
-  useAnswersState
-} from '@yext/answers-headless-react';
+  useSearchActions,
+  useSearchState
+} from '@yext/search-headless-react';
 import { ReactNode, useMemo } from 'react';
 
 import { getSelectedNumericalFacetFields, isNumberRangeValue } from '../../utils/filterutils';
@@ -47,8 +47,8 @@ export function FacetsProvider({
   className = 'w-full',
   searchOnChange = true
 }: FacetsProviderProps): JSX.Element {
-  const answersActions = useAnswersActions();
-  const facetsInState = useAnswersState(state => state.filters.facets);
+  const searchActions = useSearchActions();
+  const facetsInState = useSearchState(state => state.filters.facets);
   const facets = useMemo(() => facetsInState ?? [], [facetsInState]);
   const filters: DisplayableFilter[] = useMemo(() => {
     return facets.flatMap(f => f.options.map(o => {
@@ -73,18 +73,18 @@ export function FacetsProvider({
           matcher: filter.matcher,
           value: filter.value
         };
-        answersActions.setFacetOption(filter.fieldId, facetOption, filter.selected);
+        searchActions.setFacetOption(filter.fieldId, facetOption, filter.selected);
       },
       applyFilters() {
         if (searchOnChange) {
-          answersActions.setOffset(0);
-          clearStaticRangeFilters(answersActions, getSelectedNumericalFacetFields(answersActions));
-          executeSearch(answersActions);
+          searchActions.setOffset(0);
+          clearStaticRangeFilters(searchActions, getSelectedNumericalFacetFields(searchActions));
+          executeSearch(searchActions);
         }
       },
       filters
     };
-  }, [answersActions, filters, searchOnChange]);
+  }, [searchActions, filters, searchOnChange]);
 
   return (
     <div className={className}>

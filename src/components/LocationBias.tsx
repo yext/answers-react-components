@@ -1,4 +1,4 @@
-import { useAnswersActions, useAnswersState, LocationBiasMethod } from '@yext/answers-headless-react';
+import { useSearchActions, useSearchState, LocationBiasMethod } from '@yext/search-headless-react';
 import { executeSearch } from '../utils/search-operations';
 import { getUserLocation } from '../utils/location-operations';
 import { twMerge, useComposedCssClasses } from '../hooks/useComposedCssClasses';
@@ -53,8 +53,8 @@ export function LocationBias({
   geolocationOptions,
   customCssClasses
 }: LocationBiasProps): JSX.Element | null {
-  const answersActions = useAnswersActions();
-  const locationBias = useAnswersState(s => s.location.locationBias);
+  const searchActions = useSearchActions();
+  const locationBias = useSearchState(s => s.location.locationBias);
   const [isFetchingLocation, setIsFetchingLocation] = useState<boolean>(false);
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses);
   const loadingIndicatorCss = twMerge(cssClasses.loadingIndicatorContainer, (!isFetchingLocation && 'invisible'));
@@ -70,7 +70,7 @@ export function LocationBias({
     setIsFetchingLocation(true);
     try {
       const position = await getUserLocation(geolocationOptions);
-      answersActions.setUserLocation({
+      searchActions.setUserLocation({
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       });
@@ -79,7 +79,7 @@ export function LocationBias({
     } finally {
       setIsFetchingLocation(false);
     }
-    executeSearch(answersActions);
+    executeSearch(searchActions);
   }
 
   return (

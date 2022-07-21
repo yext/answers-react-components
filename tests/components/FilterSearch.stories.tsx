@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, SearchTypeEnum } from '@yext/answers-headless-react';
+import { SearchHeadlessContext, SearchTypeEnum } from '@yext/search-headless-react';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { FilterSearch, FilterSearchProps } from '../../src/components';
 import { userEvent, within } from '@storybook/testing-library';
 import { generateMockedAutocompleteService } from '../__fixtures__/core/autocomplete-service';
@@ -44,15 +44,15 @@ export default meta;
 
 export const Primary = (args: FilterSearchProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <FilterSearch label='Filter' {...args} searchFields={searchFields} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const DropdownUnsectioned = Primary.bind({});
 DropdownUnsectioned.parameters = {
-  answersCoreServices: {
+  searchCoreServices: {
     autoCompleteService: generateMockedAutocompleteService(undefined, unlabeledFilterSearchResponse)
   }
 };
@@ -63,13 +63,13 @@ DropdownUnsectioned.play = ({ canvasElement }) => {
 
 export const DropdownSectioned = (args: FilterSearchProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <FilterSearch label='Filter' sectioned={true} {...args} searchFields={searchFields} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 DropdownSectioned.parameters = {
-  answersCoreServices: {
+  searchCoreServices: {
     autoCompleteService: generateMockedAutocompleteService(undefined, labeledFilterSearchResponse)
   }
 };
@@ -80,13 +80,13 @@ DropdownSectioned.play = ({ canvasElement }) => {
 
 export const DropdownHighlight = (args: FilterSearchProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <FilterSearch label='Filter' sectioned={true} {...args} searchFields={searchFields} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 DropdownHighlight.parameters = {
-  answersCoreServices: {
+  searchCoreServices: {
     autoCompleteService: generateMockedAutocompleteService(undefined, labeledFilterSearchResponse)
   }
 };
@@ -99,8 +99,8 @@ DropdownHighlight.play = ({ canvasElement }) => {
 
 export const NoLabel = (args: FilterSearchProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <FilterSearch {...args} searchFields={searchFields} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

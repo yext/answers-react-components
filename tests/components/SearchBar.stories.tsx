@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext } from '@yext/answers-headless-react';
+import { SearchHeadlessContext } from '@yext/search-headless-react';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { SearchBar, SearchBarProps } from '../../src/components';
 import { userEvent, within } from '@storybook/testing-library';
 import { generateMockedAutocompleteService } from '../__fixtures__/core/autocomplete-service';
@@ -22,7 +22,7 @@ const meta: ComponentMeta<typeof SearchBar> = {
   title: 'SearchBar',
   component: SearchBar,
   parameters: {
-    answersCoreServices: {
+    searchCoreServices: {
       autoCompleteService: generateMockedAutocompleteService(mockedAutocompleteResult)
     }
   },
@@ -39,9 +39,9 @@ export default meta;
 
 export const Primary = (args: SearchBarProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless()}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless()}>
       <SearchBar {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 

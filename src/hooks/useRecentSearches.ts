@@ -1,41 +1,45 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import RecentSearches, { ISearch } from 'recent-searches';
 
-export const RECENT_SEARCHES_KEY = '__yxt_recent_searches__';
-
 export function useRecentSearches(
-  recentSearchesLimit: number
-): [ISearch[]|undefined, (input: string) => void, () => void] {
-  const recentSearchesLimitRef = useRef(recentSearchesLimit);
-  const [ recentSearches, setRecentSeaches ] = useState<RecentSearches>(
+  recentSearchesLimit: number,
+  verticalKey: string | undefined
+): [ISearch[] | undefined, (input: string) => void, () => void] {
+  const recentSearchesKey = getRecentSearchesKey(verticalKey);
+  const [recentSearches, setRecentSeaches] = useState<RecentSearches>(
     new RecentSearches({
       limit: recentSearchesLimit,
-      namespace: RECENT_SEARCHES_KEY
+      namespace: recentSearchesKey
     })
   );
 
   const clearRecentSearches = useCallback(() => {
-    localStorage.removeItem(RECENT_SEARCHES_KEY);
+    localStorage.removeItem(recentSearchesKey);
     setRecentSeaches(new RecentSearches({
       limit: recentSearchesLimit,
-      namespace: RECENT_SEARCHES_KEY
+      namespace: recentSearchesKey
     }));
-    localStorage.removeItem(RECENT_SEARCHES_KEY);
-  }, [recentSearchesLimit]);
+    localStorage.removeItem(recentSearchesKey);
+  }, [recentSearchesKey, recentSearchesLimit]);
 
   const setRecentSearch = useCallback((input: string) => {
-    recentSearches?.setRecentSearch(input);
+    recentSearches.setRecentSearch(input);
   }, [recentSearches]);
 
   useEffect(() => {
-    if (recentSearchesLimit !== recentSearchesLimitRef.current) {
-      setRecentSeaches(new RecentSearches({
-        limit: recentSearchesLimit,
-        namespace: RECENT_SEARCHES_KEY
-      }));
-      recentSearchesLimitRef.current = recentSearchesLimit;
-    }
-  }, [recentSearchesLimit]);
+    setRecentSeaches(new RecentSearches({
+      limit: recentSearchesLimit,
+      namespace: recentSearchesKey
+    }));
+  }, [recentSearchesKey, recentSearchesLimit]);
 
   return [recentSearches?.getRecentSearches(), setRecentSearch, clearRecentSearches];
+}
+
+function getRecentSearchesKey(verticalKey: string | undefined): string {
+  if (verticalKey) {
+    return `__yxt_recent_searches_${verticalKey}__`;
+  } else {
+    return '__yxt_recent_searches_universal__';
+  }
 }

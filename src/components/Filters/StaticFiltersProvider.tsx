@@ -1,4 +1,4 @@
-import { useAnswersActions, useAnswersState, SelectableFilter as DisplayableFilter } from '@yext/answers-headless-react';
+import { useSearchActions, useSearchState, SelectableFilter as DisplayableFilter } from '@yext/search-headless-react';
 import { PropsWithChildren, useMemo } from 'react';
 import { executeSearch } from '../../utils/search-operations';
 import { FiltersContext, FiltersContextType } from './FiltersContext';
@@ -31,24 +31,24 @@ export function StaticFiltersProvider({
   className = 'w-full',
   searchOnChange = true
 }: StaticFiltersProviderProps): JSX.Element {
-  const answersActions = useAnswersActions();
-  const displayableFilters = useAnswersState(state => state.filters.static);
+  const searchActions = useSearchActions();
+  const displayableFilters = useSearchState(state => state.filters.static);
 
   const filtersContextInstance: FiltersContextType = useMemo(() => {
     return {
       selectFilter(filter: DisplayableFilter) {
-        answersActions.setFilterOption({ ...filter });
+        searchActions.setFilterOption({ ...filter });
       },
       applyFilters() {
         if (searchOnChange) {
-          answersActions.setOffset(0);
-          answersActions.resetFacets();
-          executeSearch(answersActions);
+          searchActions.setOffset(0);
+          searchActions.resetFacets();
+          executeSearch(searchActions);
         }
       },
       filters: displayableFilters ?? []
     };
-  }, [answersActions, displayableFilters, searchOnChange]);
+  }, [searchActions, displayableFilters, searchOnChange]);
 
   return (
     <div className={className}>

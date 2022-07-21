@@ -1,4 +1,4 @@
-import { DisplayableFacet, Matcher } from '@yext/answers-headless-react';
+import { DisplayableFacet, Matcher } from '@yext/search-headless-react';
 
 export function createHierarchicalFacet(
   options: (string | { value: string, selected?: boolean })[],

@@ -1,7 +1,7 @@
 import { FacetsProvider, RangeInput, RangeInputCssClasses } from './Filters';
 import { FilterGroup, FilterGroupCssClasses } from './FilterGroup';
 import { Fragment } from 'react';
-import { NumberRangeValue } from '@yext/answers-headless-react';
+import { NumberRangeValue } from '@yext/search-headless-react';
 import { StandardFacetsProps } from './StandardFacets';
 import { isNumericalFacet } from '../utils/filterutils';
 

@@ -1,5 +1,5 @@
 import { useAnalytics } from './useAnalytics';
-import { useAnswersState } from '@yext/answers-headless-react';
+import { useSearchState } from '@yext/search-headless-react';
 
 type SearchBarAnalyticsType = 'AUTO_COMPLETE_SELECTION' | 'SEARCH_CLEAR_BUTTON';
 
@@ -8,8 +8,8 @@ export function useSearchBarAnalytics(): (
   suggestedSearchText?: string
 ) => void {
   const analytics = useAnalytics();
-  const verticalKey = useAnswersState(state => state.vertical.verticalKey);
-  const queryId = useAnswersState(state => state.query.queryId);
+  const verticalKey = useSearchState(state => state.vertical.verticalKey);
+  const queryId = useSearchState(state => state.query.queryId);
 
   const reportAutocompleteEvent = (suggestedSearchText: string) => {
     analytics?.report({

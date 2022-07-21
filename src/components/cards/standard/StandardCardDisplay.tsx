@@ -8,7 +8,7 @@ import {
 import { renderHighlightedValue } from '../../utils/renderHighlightedValue';
 import { CtaData } from '../../../models/StandardCardData';
 
-import { HighlightedValue } from '@yext/answers-headless-react';
+import { HighlightedValue } from '@yext/search-headless-react';
 import React, { MouseEventHandler } from 'react';
 import PropTypes from 'prop-types';
 

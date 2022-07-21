@@ -1,4 +1,4 @@
-import { Filter, Matcher, NumberRangeValue, useAnswersUtilities } from '@yext/answers-headless-react';
+import { Filter, Matcher, NumberRangeValue, useSearchUtilities } from '@yext/search-headless-react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useFiltersContext } from './FiltersContext';
@@ -80,7 +80,7 @@ export function CheckboxOption(props: CheckboxOptionProps): JSX.Element | null {
   } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
   const optionId = useMemo(() => uuid(), []);
-  const answersUtilities = useAnswersUtilities();
+  const searchUtilities = useSearchUtilities();
   const { selectFilter, filters, applyFilters } = useFiltersContext();
 
   const handleClick = useCallback((checked: boolean) => {
@@ -113,12 +113,12 @@ export function CheckboxOption(props: CheckboxOptionProps): JSX.Element | null {
       return false;
     }
 
-    if (!answersUtilities.isCloseMatch(displayName, searchValue)) {
+    if (!searchUtilities.isCloseMatch(displayName, searchValue)) {
       return false;
     }
 
     return true;
-  }, [value, answersUtilities, displayName, searchValue]);
+  }, [value, searchUtilities, displayName, searchValue]);
 
   useEffect(() => {
     if (shouldRenderOption) {

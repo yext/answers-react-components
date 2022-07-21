@@ -1,6 +1,6 @@
 {
-  "name": "@yext/answers-react-components",
-  "version": "0.2.0-beta.184",
+  "name": "@yext/search-ui-react",
+  "version": "0.2.0-beta.243",
   "description": "A library of React Components for powering Yext Search integrations",
   "author": "slapshot@yext.com",
   "license": "BSD-3-Clause",
@@ -68,8 +68,8 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
     "@typescript-eslint/parser": "^5.16.0",
-    "@yext/answers-headless-react": "^1.2.0",
     "@yext/eslint-config-slapshot": "^0.4.0",
+    "@yext/search-headless-react": "^1.4.0-alpha.147",
     "babel-jest": "^27.0.6",
     "babel-loader": "^8.2.3",
     "eslint": "^8.11.0",
@@ -87,7 +87,7 @@
     "typescript": "~4.4.3"
   },
   "peerDependencies": {
-    "@yext/answers-headless-react": "^1.2.0",
+    "@yext/search-headless-react": "^1.4.0-alpha.147",
     "react": "^16.14 || ^17 || ^18"
   },
   "jest": {
@@ -119,10 +119,10 @@
       "<rootDir>/tests/__fixtures__/*"
     ],
     "transformIgnorePatterns": [
-      "/node_modules/(?!(@yext/answers-headless-react)/)"
+      "/node_modules/(?!(@yext/search-headless-react)/)"
     ],
     "moduleNameMapper": {
-      "./AnswersCore": "<rootDir>/tests/__fixtures__/core/AnswersCore.ts"
+      "./SearchCore": "<rootDir>/tests/__fixtures__/core/SearchCore.ts"
     },
     "resetMocks": true,
     "restoreMocks": true
@@ -147,6 +147,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/yext/answers-react-components.git"
+    "url": "https://github.com/yext/search-ui-react.git"
   }
 }

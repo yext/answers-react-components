@@ -1,10 +1,8 @@
 import { processTranslation } from './utils/processTranslation';
 import { StarIcon } from '../icons/StarIcon';
-import { useAnswersState, VerticalResults as VerticalResultsData } from '@yext/answers-headless-react';
+import { useSearchState, VerticalResults as VerticalResultsData } from '@yext/search-headless-react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
 import classNames from 'classnames';
-import { isVerticalLink, VerticalLink } from '../models/verticalLink';
-import { UniversalLink } from '../models/universalLink';
 import { VerticalConfig } from '../models/verticalConfig';
 
 /**
@@ -26,7 +24,7 @@ const builtInCssClasses: Readonly<AlternativeVerticalsCssClasses> = {
   alternativeVerticalsLoading: 'opacity-50',
   noResultsText: 'text-lg text-neutral-dark pb-2',
   categoriesText: 'text-neutral',
-  suggestion: 'pb-4',
+  suggestion: 'pb-4 flex items-center',
   verticalIcon: 'w-4 mr-2'
 };
 
@@ -66,13 +64,6 @@ export interface AlternativeVerticalsProps {
    * Defaults to true.
    */
   displayAllOnNoResults?: boolean,
-  /**
-   * A function to provide user defined url path for vertical and universal sugestion links.
-   *
-   * Defaults to "/[verticalKey]?query=[query]" for vertical links and "/?query=[query]"
-   * for universal links.
-   */
-  getSuggestionUrl?: (data: VerticalLink | UniversalLink) => string,
   /** CSS classes for customizing the component styling. */
   customCssClasses?: AlternativeVerticalsCssClasses
 }
@@ -90,31 +81,22 @@ export function AlternativeVerticals({
   currentVerticalLabel,
   verticalConfigMap,
   displayAllOnNoResults = true,
-  customCssClasses,
-  getSuggestionUrl: customGetSuggestionUrl
+  customCssClasses
 }: AlternativeVerticalsProps): JSX.Element | null {
   const cssClasses = useComposedCssClasses(builtInCssClasses, customCssClasses);
 
-  const alternativeVerticals = useAnswersState(state => state.vertical.noResults?.alternativeVerticals) || [];
+  const alternativeVerticals = useSearchState(state => state.vertical.noResults?.alternativeVerticals) || [];
   const allResultsForVertical =
-    useAnswersState(state => state.vertical.noResults?.allResultsForVertical.results) || [];
-  const query = useAnswersState(state => state.query.mostRecentSearch);
+    useSearchState(state => state.vertical.noResults?.allResultsForVertical.results) || [];
+  const query = useSearchState(state => state.query.mostRecentSearch);
 
   const verticalSuggestions = buildVerticalSuggestions(verticalConfigMap, alternativeVerticals);
   const isShowingAllResults = displayAllOnNoResults && allResultsForVertical.length > 0;
 
-  const isLoading = useAnswersState(state => state.searchStatus.isLoading);
+  const isLoading = useSearchState(state => state.searchStatus.isLoading);
   const containerClassNames = classNames(cssClasses.alternativeVerticalsContainer, {
     [cssClasses.alternativeVerticalsLoading ?? '']: isLoading
   });
-
-  const getSuggestionUrl = customGetSuggestionUrl
-    ? customGetSuggestionUrl
-    : (data: VerticalLink | UniversalLink) => {
-      return isVerticalLink(data)
-        ? `/${data.verticalKey}?query=${data.query}`
-        :`/?query=${data.query}`;
-    };
 
   function buildVerticalSuggestions(
     verticalConfigMap: VerticalLabelMap,
@@ -143,7 +125,7 @@ export function AlternativeVerticals({
     <div className={containerClassNames}>
       {renderNoResultsInfo()}
       {verticalSuggestions &&
-        <div className='pt-4 text-primary'>
+        <div className='pt-4 text-neutral-dark'>
           <div className={cssClasses.categoriesText}>
             <span>
               {processTranslation({
@@ -157,7 +139,6 @@ export function AlternativeVerticals({
           <ul className='pt-4'>
             {verticalSuggestions.map(renderSuggestion)}
           </ul>
-          {renderUniversalDetails()}
         </div>
       }
     </div>
@@ -175,26 +156,16 @@ export function AlternativeVerticals({
   }
 
   function renderSuggestion(suggestion: VerticalSuggestion) {
-    const href = getSuggestionUrl({ verticalKey: suggestion.verticalKey, query });
+    const resultsCountText = processTranslation({
+      phrase: `${suggestion.resultsCount} result`,
+      pluralForm: `${suggestion.resultsCount} results`,
+      count: suggestion.resultsCount
+    });
     return (
       <li key={suggestion.verticalKey} className={cssClasses.suggestion}>
-        <a className='inline-flex items-center hover:underline focus:underline' href={href}>
-          <div className={cssClasses.verticalIcon}><StarIcon/></div>
-          <span className='font-bold'>{suggestion.label}</span>
-        </a>
+        <div className={cssClasses.verticalIcon}><StarIcon/></div>
+        <span className='font-bold'>{suggestion.label} - {resultsCountText}</span>
       </li>
-    );
-  }
-
-  function renderUniversalDetails() {
-    const href = getSuggestionUrl({ query });
-    return (
-      <div className={cssClasses.categoriesText}>
-        <span>View results across </span>
-        <a className='text-primary hover:underline focus:underline' href={href}>
-          all search categories.
-        </a>
-      </div>
     );
   }
 }

@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, State } from '@yext/answers-headless-react';
+import { SearchHeadlessContext, State } from '@yext/search-headless-react';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { UniversalResults, UniversalResultsProps } from '../../src/components/UniversalResults';
 import { RecursivePartial } from '../__utils__/mocks';
 import { verticalResults } from '../__fixtures__/data/universalresults';
@@ -28,19 +28,19 @@ const verticalConfigMap = {
 
 export const Primary = (args: UniversalResultsProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <UniversalResults verticalConfigMap={verticalConfigMap} showAppliedFilters={true} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
 export const Loading = (args: UniversalResultsProps) => {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...mockedHeadlessState,
       searchStatus: { isLoading: true }
     })}>
       <UniversalResults verticalConfigMap={verticalConfigMap} showAppliedFilters={true} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

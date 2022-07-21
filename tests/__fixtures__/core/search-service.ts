@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { SearchService, UniversalSearchRequest, UniversalSearchResponse, VerticalSearchRequest, VerticalSearchResponse } from '@yext/answers-core';
+import { SearchService, UniversalSearchRequest, UniversalSearchResponse, VerticalSearchRequest, VerticalSearchResponse } from '@yext/search-core';
 
 /* A sample Universal Search response. */
 const mockedUniversalResponse: UniversalSearchResponse = {

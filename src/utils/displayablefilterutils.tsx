@@ -3,7 +3,7 @@ import {
   DisplayableFacet,
   SelectableFilter as DisplayableFilter,
   DisplayableFacetOption
-} from '@yext/answers-headless-react';
+} from '@yext/search-headless-react';
 import { DisplayableHierarchicalFacet } from '../models/groupedFilters';
 
 /**

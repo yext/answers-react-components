@@ -8,5 +8,5 @@
 
 |  Package | Description |
 |  --- | --- |
-|  [@yext/answers-react-components](./answers-react-components.md) |  |
+|  [@yext/search-ui-react](./search-ui-react.md) |  |
 

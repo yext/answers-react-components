@@ -1,4 +1,4 @@
-import { AnswersHeadless, UniversalLimit, VerticalResults as VerticalResultsData } from '@yext/answers-headless-react';
+import { SearchHeadless, UniversalLimit, VerticalResults as VerticalResultsData } from '@yext/search-headless-react';
 import { useState } from 'react';
 import { useComponentMountStatus } from './useComponentMountStatus';
 import { useDebouncedFunction } from './useDebouncedFunction';
@@ -22,7 +22,7 @@ type ExecuteEntityPreviewsQuery = (
  * @param debounceTime - the time in milliseconds to debounce the universal search request
  */
 export function useEntityPreviews(
-  entityPreviewSearcher: AnswersHeadless | undefined,
+  entityPreviewSearcher: SearchHeadless | undefined,
   debounceTime: number
 ): [EntityPreviewsState, ExecuteEntityPreviewsQuery] {
   const isMountedRef = useComponentMountStatus();

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { Matcher, Source, State, FiltersState } from '@yext/answers-headless-react';
+import { Matcher, Source, State, FiltersState } from '@yext/search-headless-react';
 import { AppliedFilters } from '../../src/components/AppliedFilters';
 import { createHierarchicalFacet } from '../__utils__/hierarchicalfacets';
 import { spyOnActions, mockAnswersState, mockAnswersHooks } from '../__utils__/mocks';
@@ -75,7 +75,7 @@ const mockedActions = {
   resetFacets: jest.fn(),
   setStaticFilters: jest.fn()
 };
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('AppliedFilters', () => {
   beforeEach(() => {

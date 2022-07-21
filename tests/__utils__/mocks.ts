@@ -1,15 +1,15 @@
 import {
-  AnswersHeadless,
   State,
   StateSelector,
-  useAnswersState,
-  useAnswersActions,
-  AnswersUtilities,
-  useAnswersUtilities
-} from '@yext/answers-headless-react';
+  useSearchState,
+  useSearchActions,
+  SearchUtilities,
+  useSearchUtilities,
+  SearchActions
+} from '@yext/search-headless-react';
 
-export function spyOnActions(): jest.Mocked<AnswersHeadless> {
-  const spy = jest.spyOn(require('@yext/answers-headless-react'), 'useAnswersActions');
+export function spyOnActions(): jest.Mocked<SearchActions> {
+  const spy = jest.spyOn(require('@yext/search-headless-react'), 'useSearchActions');
   const proxyHandler = {
     get: (_, prop) => spy.mock.results[0].value[prop]
   };
@@ -26,41 +26,41 @@ export type RecursivePartial<T> = {
 
 export function mockAnswersState(
   customState: RecursivePartial<State>
-): jest.SpyInstance<typeof useAnswersState, unknown[]> {
+): jest.SpyInstance<typeof useSearchState, unknown[]> {
   function mockImpl<T>(stateAccessor: StateSelector<T>) {
     return stateAccessor({
       ...customState
     } as State);
   }
   return jest
-    .spyOn(require('@yext/answers-headless-react'), 'useAnswersState')
+    .spyOn(require('@yext/search-headless-react'), 'useSearchState')
     .mockImplementation(mockImpl as (...args: unknown[]) => unknown);
 }
 
-export function mockAnswersActions(
-  customActions: RecursivePartial<AnswersHeadless>
-): jest.SpyInstance<typeof useAnswersActions, unknown[]> {
+export function mockSearchActions(
+  customActions: RecursivePartial<SearchActions>
+): jest.SpyInstance<typeof useSearchActions, unknown[]> {
   return jest
-    .spyOn(require('@yext/answers-headless-react'), 'useAnswersActions')
-    .mockImplementation(() => customActions as AnswersHeadless);
+    .spyOn(require('@yext/search-headless-react'), 'useSearchActions')
+    .mockImplementation(() => customActions as SearchActions);
 }
 
 export function mockAnswersUtils(
-  customUtils: RecursivePartial<AnswersUtilities>
-): jest.SpyInstance<typeof useAnswersUtilities, unknown[]> {
+  customUtils: RecursivePartial<SearchUtilities>
+): jest.SpyInstance<typeof useSearchUtilities, unknown[]> {
   return jest
-    .spyOn(require('@yext/answers-headless-react'), 'useAnswersUtilities')
-    .mockImplementation(() => customUtils as AnswersUtilities);
+    .spyOn(require('@yext/search-headless-react'), 'useSearchUtilities')
+    .mockImplementation(() => customUtils as SearchUtilities);
 }
 
 export function mockAnswersHooks({
   mockedState, mockedActions, mockedUtils
 }: {
   mockedState?: RecursivePartial<State>,
-  mockedActions?: RecursivePartial<AnswersHeadless>,
-  mockedUtils?: RecursivePartial<AnswersUtilities>
+  mockedActions?: RecursivePartial<SearchActions>,
+  mockedUtils?: RecursivePartial<SearchUtilities>
 }) {
   mockedUtils && mockAnswersUtils(mockedUtils);
   mockedState && mockAnswersState(mockedState);
-  mockedActions && mockAnswersActions(mockedActions);
+  mockedActions && mockSearchActions(mockedActions);
 }

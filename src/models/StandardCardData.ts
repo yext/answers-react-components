@@ -1,4 +1,4 @@
-import { HighlightedValue } from '@yext/answers-headless-react';
+import { HighlightedValue } from '@yext/search-headless-react';
 
 /**
  * The data used by the {@link StandardCard} and taken from the original Result.

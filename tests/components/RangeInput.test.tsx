@@ -1,9 +1,8 @@
 import userEvent from '@testing-library/user-event';
-import { State } from '@yext/answers-headless-react';
+import { State, Matcher, SelectableFilter } from '@yext/search-headless-react';
 import { render, screen, waitFor } from '@testing-library/react';
 import { RangeInput } from '../../src/components/Filters';
 import { mockAnswersHooks, spyOnActions } from '../__utils__/mocks';
-import { Matcher, SelectableFilter } from '@yext/answers-headless-react';
 import { FiltersContext, FiltersContextType } from '../../src/components/Filters/FiltersContext';
 import { FilterGroupContext, FilterGroupContextType } from '../../src/components/Filters/FilterGroupContext';
 
@@ -24,7 +23,7 @@ const mockedActions = {
   executeVerticalQuery: jest.fn()
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 it('renders the correct inital state', () => {
   renderRangeInput(filterContextValue);

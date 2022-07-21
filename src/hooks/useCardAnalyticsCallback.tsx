@@ -1,4 +1,4 @@
-import { Result, DirectAnswer as DirectAnswerData } from '@yext/answers-headless-react';
+import { Result, DirectAnswer as DirectAnswerData } from '@yext/search-headless-react';
 import { useCallback } from 'react';
 import { CardAnalyticsType, useCardAnalytics } from './useCardAnalytics';
 

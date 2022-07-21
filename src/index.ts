@@ -17,7 +17,7 @@ export * from './utils';
  * In user's tailwind.config.js file:
  *
  * ```js
- * const { ComponentsContentPath } = require('@yext/answers-react-components');
+ * const { ComponentsContentPath } = require('@yext/search-ui-react');
  *
  * module.exports = {
  *  content: [ ComponentsContentPath ],
@@ -25,4 +25,4 @@ export * from './utils';
  * };
  * ```
  */
-export const ComponentsContentPath = 'node_modules/@yext/answers-react-components/lib/**/*.{js,jsx}';
+export const ComponentsContentPath = 'node_modules/@yext/search-ui-react/lib/**/*.{js,jsx}';

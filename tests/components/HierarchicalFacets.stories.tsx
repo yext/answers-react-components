@@ -1,6 +1,6 @@
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, State } from '@yext/answers-headless-react';
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { SearchHeadlessContext, State } from '@yext/search-headless-react';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { createHierarchicalFacet } from '../__utils__/hierarchicalfacets';
 import { RecursivePartial } from '../__utils__/mocks';
 import { HierarchicalFacets, HierarchicalFacetsProps } from '../../src';
@@ -26,8 +26,8 @@ const mockedHeadlessState: RecursivePartial<State> = {
 
 export function Primary(args: HierarchicalFacetsProps): JSX.Element {
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <HierarchicalFacets includedFieldIds={['hier']} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 }

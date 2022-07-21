@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AnswersHeadless, State } from '@yext/answers-headless-react';
+import { SearchActions, State } from '@yext/search-headless-react';
 import { mockAnswersHooks, spyOnActions } from '../__utils__/mocks';
 import { FilterOptionConfig } from '../../src/components/Filters';
 import userEvent from '@testing-library/user-event';
@@ -54,7 +54,7 @@ const mockedUtils = {
   }
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('Static Filters', () => {
   beforeEach(() => {
@@ -173,7 +173,7 @@ describe('Static Filters', () => {
 });
 
 function expectFilterOptionSet(
-  actions: AnswersHeadless,
+  actions: SearchActions,
   fieldId: string,
   filterOption: FilterOptionConfig,
   selected: boolean

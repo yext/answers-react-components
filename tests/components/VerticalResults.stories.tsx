@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentMeta } from '@storybook/react';
-import { AnswersHeadlessContext, Source } from '@yext/answers-headless-react';
+import { SearchHeadlessContext, Source } from '@yext/search-headless-react';
 
-import { generateMockedHeadless } from '../__fixtures__/answers-headless';
+import { generateMockedHeadless } from '../__fixtures__/search-headless';
 import { VerticalResults, VerticalResultsProps } from '../../src/components/VerticalResults';
 import { StandardCard } from '../../src/components/cards/standard/StandardCard';
 
@@ -49,9 +49,9 @@ export const NoResults = (args: VerticalResultsProps) => {
     CardComponent: StandardCard
   };
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({})}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({})}>
       <VerticalResults {...verticalResultsProps} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
@@ -60,9 +60,9 @@ export const HasResults = (args: VerticalResultsProps) => {
     CardComponent: StandardCard
   };
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
+    <SearchHeadlessContext.Provider value={generateMockedHeadless(mockedHeadlessState)}>
       <VerticalResults {...verticalResultsProps} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };
 
@@ -71,11 +71,11 @@ export const Loading = (args: VerticalResultsProps) => {
     CardComponent: StandardCard
   };
   return (
-    <AnswersHeadlessContext.Provider value={generateMockedHeadless({
+    <SearchHeadlessContext.Provider value={generateMockedHeadless({
       ...mockedHeadlessState,
       searchStatus: { isLoading: true }
     })}>
       <VerticalResults {...verticalResultsProps} {...args} />
-    </AnswersHeadlessContext.Provider>
+    </SearchHeadlessContext.Provider>
   );
 };

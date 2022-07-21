@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { AnswersHeadless, FacetOption, Matcher, NumberRangeValue, SelectableFilter, Source, State } from '@yext/answers-headless-react';
+import { SearchActions, FacetOption, Matcher, NumberRangeValue, SelectableFilter, Source, State } from '@yext/search-headless-react';
 import { mockAnswersHooks, mockAnswersState, spyOnActions } from '../__utils__/mocks';
 import userEvent from '@testing-library/user-event';
 import { DisplayableFacets } from '../__fixtures__/data/filters';
@@ -38,7 +38,7 @@ const mockedUtils = {
   isCloseMatch: () => true
 };
 
-jest.mock('@yext/answers-headless-react');
+jest.mock('@yext/search-headless-react');
 
 describe('NumericalFacets', () => {
   beforeEach(() => {
@@ -145,7 +145,7 @@ describe('NumericalFacets', () => {
 });
 
 function expectFacetOptionSet(
-  actions: AnswersHeadless,
+  actions: SearchActions,
   fieldId: string,
   option: FacetOption,
   selected: boolean

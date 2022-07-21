@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { AutocompleteResponse, AutocompleteService, FilterSearchRequest, FilterSearchResponse, UniversalAutocompleteRequest, VerticalAutocompleteRequest } from '@yext/answers-core';
+import { AutocompleteResponse, AutocompleteService, FilterSearchRequest, FilterSearchResponse, UniversalAutocompleteRequest, VerticalAutocompleteRequest } from '@yext/search-core';
 
 /* A sample Autocomplete response. */
 const mockedResponse: AutocompleteResponse = {

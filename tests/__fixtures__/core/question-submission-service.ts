@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { QuestionSubmissionRequest, QuestionSubmissionResponse, QuestionSubmissionService } from '@yext/answers-core';
+import { QuestionSubmissionRequest, QuestionSubmissionResponse, QuestionSubmissionService } from '@yext/search-core';
 
 /* A sample Question Submission response. */
 const mockedResponse: QuestionSubmissionResponse = {
