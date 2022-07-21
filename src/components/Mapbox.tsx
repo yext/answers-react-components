@@ -8,7 +8,9 @@ import { Result } from '@yext/answers-headless-react';
  *
  * @public
  */
-export type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
+export interface MapboxCustomOptions extends Omit<MapboxOptions, 'container'> {
+  style: mapboxgl.Style | string
+};
 
 /**
  * Props for the {@link Mapbox} component
@@ -19,10 +21,6 @@ export interface MapboxProps {
   mapboxApiKey: string,
   mapboxOptions?: MapboxCustomOptions,
   generateMarkerOptions?: (result?: Result, index?: number) => MarkerOptions,
-  mapCenter?: {
-    lat: number,
-    lng: number
-  }
 }
 
 /**
@@ -37,7 +35,6 @@ export function Mapbox({
   mapboxApiKey,
   mapboxOptions,
   generateMarkerOptions = defaultGenerateMarkerOptions,
-  mapCenter
 }: MapboxProps) {
   mapboxgl.accessToken = mapboxApiKey;
   const mapContainer = useRef(null);
@@ -55,8 +52,14 @@ export function Mapbox({
     }
   });
 
+  useEffect(() => {
+    if (map.current) {
+      map.current.resize();
+    }
+  });
+
   return (
-    <div>
+    <div className='h-10'>
       <div ref={mapContainer} />
     </div>
   );
