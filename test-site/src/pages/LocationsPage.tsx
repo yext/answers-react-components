@@ -9,7 +9,7 @@ import {
   Mapbox,
   Pagination,
   MapboxCustomOptions
-} from '@yext/answers-react-components';
+} from '@yext/search-ui-react';
 import { useLayoutEffect } from 'react';
 
 export function LocationsPage() {
