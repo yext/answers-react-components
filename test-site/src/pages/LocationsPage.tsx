@@ -1,4 +1,4 @@
-import { useAnswersActions } from '@yext/search-headless-react';
+import { useSearchActions } from '@yext/search-headless-react';
 import {
   AppliedFilters,
   ResultsCount,
@@ -13,7 +13,7 @@ import {
 import { useLayoutEffect } from 'react';
 
 export function LocationsPage() {
-  const answersActions = useAnswersActions();
+  const answersActions = useSearchActions();
   useLayoutEffect(() => {
     answersActions.setVertical('KM');
   });
