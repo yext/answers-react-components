@@ -4,7 +4,7 @@
 
 ## MapboxCustomOptions type
 
-Options interface for customizing the [Mapbox()](./answers-react-components.mapbox.md) map. The "container" field is omitted.
+Interface for customizing the [Mapbox()](./answers-react-components.mapbox.md) map derived from the Mapbox API's Map options. The "container" field is set internally.
 
 <b>Signature:</b>
 

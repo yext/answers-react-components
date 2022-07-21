@@ -120,7 +120,7 @@
 |  [DropdownItemProps](./answers-react-components.dropdownitemprops.md) | Props for the [DropdownItem()](./answers-react-components.dropdownitem.md)<!-- -->. |
 |  [FeedbackType](./answers-react-components.feedbacktype.md) | Analytics event types for quality feedback. |
 |  [FocusedItemData](./answers-react-components.focuseditemdata.md) | The data associated with the currently focused item. |
-|  [MapboxCustomOptions](./answers-react-components.mapboxcustomoptions.md) | Options interface for customizing the [Mapbox()](./answers-react-components.mapbox.md) map. The "container" field is omitted. |
+|  [MapboxCustomOptions](./answers-react-components.mapboxcustomoptions.md) | Interface for customizing the [Mapbox()](./answers-react-components.mapbox.md) map derived from the Mapbox API's Map options. The "container" field is set internally. |
 |  [onSearchFunc](./answers-react-components.onsearchfunc.md) | The interface of a function which is called on a search. |
 |  [RenderEntityPreviews](./answers-react-components.renderentitypreviews.md) | The type of a functional React component which renders entity previews using a map of vertical key to the corresponding VerticalResults data. |
 |  [SectionComponent](./answers-react-components.sectioncomponent.md) | A component that can be used to render a section template for vertical results. |
