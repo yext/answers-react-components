@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { Map, MapboxOptions, MarkerOptions } from 'mapbox-gl';
-import { Result } from '@yext/search-headless-react';
+import { Map, Marker, MapboxOptions, MarkerOptions } from 'mapbox-gl';
+import { Result, useSearchState } from '@yext/search-headless-react';
 
 /**
  * Interface for customizing the {@link Mapbox} map derived from Mapbox API's Map options.
@@ -43,6 +43,17 @@ export function Mapbox({
   const mapboxOptionsWithRef = useRef<MapboxOptions>();
   const mapboxStyle = mapboxOptions?.style ?? 'mapbox://styles/mapbox/streets-v11';
 
+  const locationResults = useSearchState(state => state.vertical.results) || [];
+  if (map.current) {
+    for (const result of locationResults) {
+      const markerLocation = getPosition(result);
+      const div = document.createElement('div');
+      div.className = '';
+
+      new Marker(div).setLngLat(markerLocation).addTo(map.current);
+    }
+  }
+
   useEffect(() => {
     if (mapContainer.current && !map.current) {
       const options: MapboxOptions = {
@@ -62,5 +73,13 @@ export function Mapbox({
 
 function defaultGenerateMarkerOptions(): MarkerOptions {
   return {};
+}
+
+// TEMPORARY FIX
+/* eslint-disable @typescript-eslint/no-explicit-any */
+function getPosition(result: Result): [number, number]{
+  const lat = (result.rawData as any).yextDisplayCoordinate.latitude;
+  const lng = (result.rawData as any).yextDisplayCoordinate.longitude;
+  return [lng, lat];
 }
 
