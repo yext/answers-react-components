@@ -113,8 +113,8 @@ export interface VisualAutocompleteConfig {
   entityPreviewSearcher: SearchHeadless,
   /** Renders entity previews based on the autocomplete loading state and results. */
   renderEntityPreviews: RenderEntityPreviews,
-  /** Specify which verticals to return for VisualAutocomplete. */
-  restrictVerticals: string[],
+  /** Specify which verticals to include for VisualAutocomplete. */
+  includedVerticals: string[],
   /** Specify the number of entities to return per vertical. **/
   universalLimit?: UniversalLimit,
   /** The debouncing time, in milliseconds, for making API requests for entity previews. */
@@ -176,7 +176,7 @@ export function SearchBar({
   const {
     entityPreviewSearcher,
     renderEntityPreviews,
-    restrictVerticals,
+    includedVerticals,
     universalLimit,
     entityPreviewsDebouncingTime = 500
   } = visualAutocompleteConfig ?? {};
@@ -254,11 +254,11 @@ export function SearchBar({
     { onClick: handleSubmit, ariaLabel: getAriaLabel }
   );
   const updateEntityPreviews = useCallback((query: string) => {
-    if (!renderEntityPreviews || !restrictVerticals) {
+    if (!renderEntityPreviews || !includedVerticals) {
       return;
     }
-    executeEntityPreviewsQuery(query, universalLimit ?? {}, restrictVerticals);
-  }, [executeEntityPreviewsQuery, renderEntityPreviews, restrictVerticals, universalLimit]);
+    executeEntityPreviewsQuery(query, universalLimit ?? {}, includedVerticals);
+  }, [executeEntityPreviewsQuery, renderEntityPreviews, includedVerticals, universalLimit]);
 
   const handleInputFocus = useCallback((value = '') => {
     searchActions.setQuery(value);

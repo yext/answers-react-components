@@ -741,8 +741,8 @@ export interface VerticalResultsProps {
 export interface VisualAutocompleteConfig {
     entityPreviewsDebouncingTime?: number;
     entityPreviewSearcher: SearchHeadless;
+    includedVerticals: string[];
     renderEntityPreviews: RenderEntityPreviews;
-    restrictVerticals: string[];
     universalLimit?: UniversalLimit;
 }
 
