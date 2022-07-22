@@ -1,11 +1,13 @@
-import { PropsWithChildren, useMemo } from 'react';
+import { useSearchUtilities } from '@yext/search-headless-react';
+import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import {
   CheckboxOption,
   CollapsibleLabel,
   CollapsibleSection,
   FilterOptionConfig,
   SearchInput,
-  FilterGroupProvider
+  FilterGroupProvider,
+  useFilterGroupContext
 } from './Filters';
 
 /**
@@ -43,7 +45,9 @@ export interface FilterGroupProps {
   /** Whether or not to display a text input to search for filter options. */
   searchable?: boolean,
   /** CSS classes for customizing the component styling. */
-  customCssClasses?: FilterGroupCssClasses
+  customCssClasses?: FilterGroupCssClasses,
+  /** Limit on the number of options to be displayed. */
+  showMoreLimit?: number
 }
 
 /**
@@ -57,6 +61,7 @@ export function FilterGroup({
   defaultExpanded = true,
   searchable,
   customCssClasses = {},
+  showMoreLimit = filterOptions.length,
   children
 }: PropsWithChildren<FilterGroupProps>) {
   const cssClasses = useMemo(() => {
@@ -69,6 +74,9 @@ export function FilterGroup({
     };
   }, [customCssClasses]);
 
+  const isLimited = filterOptions.length > showMoreLimit;
+  const [showAll, setShowAll] = useState<boolean>(!isLimited);
+
   function renderTitle() {
     return collapsible
       ? <CollapsibleLabel label={title} />
@@ -77,6 +85,7 @@ export function FilterGroup({
           {title}
         </div>);
   }
+
   return (
     <FilterGroupProvider
       fieldId={fieldId}
@@ -85,17 +94,57 @@ export function FilterGroup({
       {renderTitle()}
       <CollapsibleSection className={cssClasses.optionsContainer}>
         {searchable && <SearchInput className={cssClasses.searchInput} />}
-        {filterOptions.map(o => {
-          return (
-            <CheckboxOption
-              {...o}
-              key={o.displayName || o.value.toString()}
-              customCssClasses={cssClasses}
-            />
-          );
-        })}
+        <CheckboxOptions
+          filterOptions={filterOptions}
+          showMoreLimit={showMoreLimit}
+          cssClasses={cssClasses}
+          showAll={showAll} />
+        {isLimited &&
+          /* eslint-disable-next-line react-perf/jsx-no-new-function-as-prop */
+          <button className='text-primary py-1 text-sm' onClick={() => setShowAll(!showAll)}>
+            {showAll ? 'Show Less' : 'Show More'}
+          </button>
+        }
         {children}
       </CollapsibleSection>
     </FilterGroupProvider>
+  );
+}
+
+function CheckboxOptions({
+  filterOptions,
+  showMoreLimit,
+  cssClasses,
+  showAll
+}) {
+  const searchUtilities = useSearchUtilities();
+  const { searchValue } = useFilterGroupContext();
+  const shouldRenderOption = useCallback((option: { displayName: string, value: unknown }) => {
+    if (typeof option.displayName !== 'string') {
+      console.error('A displayName is needed for filter with value', option.value);
+      return false;
+    }
+
+    if (!searchUtilities.isCloseMatch(option.displayName, searchValue)) {
+      return false;
+    }
+
+    return true;
+  }, [searchUtilities, searchValue]);
+
+  return (
+    <>
+      {filterOptions.filter(o => {
+        return shouldRenderOption(o);
+      }).map(o => {
+        return (
+          <CheckboxOption
+            {...o}
+            key={o.displayName || o.value.toString()}
+            customCssClasses={cssClasses}
+          />
+        );
+      }).slice(0, showAll ? filterOptions.length : showMoreLimit)}
+    </>
   );
 }

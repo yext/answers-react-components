@@ -22,5 +22,6 @@ export interface FilterGroupProps
 |  [fieldId](./search-ui-react.filtergroupprops.fieldid.md) | string | The fieldId corresponding to the filter group. |
 |  [filterOptions](./search-ui-react.filtergroupprops.filteroptions.md) | [FilterOptionConfig](./search-ui-react.filteroptionconfig.md)<!-- -->\[\] | The configuration data for a filter option. |
 |  [searchable?](./search-ui-react.filtergroupprops.searchable.md) | boolean | <i>(Optional)</i> Whether or not to display a text input to search for filter options. |
+|  [showMoreLimit?](./search-ui-react.filtergroupprops.showmorelimit.md) | number | <i>(Optional)</i> Limit on the number of options to be displayed. |
 |  [title](./search-ui-react.filtergroupprops.title.md) | string | The displayed label for the filter group. |
 

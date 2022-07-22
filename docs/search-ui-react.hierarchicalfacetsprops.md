@@ -9,9 +9,9 @@ Props for the [HierarchicalFacets()](./search-ui-react.hierarchicalfacets.md) co
 <b>Signature:</b>
 
 ```typescript
-export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'searchable' | 'excludedFieldIds'> 
+export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'excludedFieldIds'> 
 ```
-<b>Extends:</b> Omit&lt;[StandardFacetsProps](./search-ui-react.standardfacetsprops.md)<!-- -->, 'searchable' \| 'excludedFieldIds'&gt;
+<b>Extends:</b> Omit&lt;[StandardFacetsProps](./search-ui-react.standardfacetsprops.md)<!-- -->, 'excludedFieldIds'&gt;
 
 ## Properties
 

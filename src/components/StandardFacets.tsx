@@ -23,8 +23,6 @@ export interface StandardFacetsProps {
   collapsible?: boolean,
   /** {@inheritDoc FilterGroupProps.defaultExpanded} */
   defaultExpanded?: boolean,
-  /** {@inheritDoc FilterGroupProps.searchable} */
-  searchable?: boolean,
   /**
    * Whether or not a search is automatically run when a filter is selected.
    * Defaults to true.
@@ -38,7 +36,12 @@ export interface StandardFacetsProps {
    */
   showOptionCounts?: boolean,
   /** CSS classes for customizing the component styling. */
-  customCssClasses?: StandardFacetsCssClasses
+  customCssClasses?: StandardFacetsCssClasses,
+  /**
+   * Limit on the number of options to be displayed.
+   * Defaults to 10.
+   */
+  showMoreLimit?: number
 }
 
 /**
@@ -59,6 +62,7 @@ export function StandardFacets(props: StandardFacetsProps) {
     searchOnChange,
     excludedFieldIds = [],
     customCssClasses = {},
+    showMoreLimit = 10,
     showOptionCounts = true,
     ...filterGroupProps
   } = props;
@@ -76,6 +80,8 @@ export function StandardFacets(props: StandardFacetsProps) {
                 })}
                 title={f.displayName}
                 customCssClasses={customCssClasses}
+                showMoreLimit={showMoreLimit}
+                searchable={f.options.length > showMoreLimit}
                 {...filterGroupProps}
               />
               {(i < facets.length - 1) && <Divider className={customCssClasses.divider}/>}

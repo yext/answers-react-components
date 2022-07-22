@@ -24,7 +24,7 @@ export interface HierarchicalFacetsCssClasses extends HierarchicalFacetDisplayCs
  *
  * @public
  */
-export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'searchable' | 'excludedFieldIds'> {
+export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'excludedFieldIds'> {
   /** List of filter ids to render as hierarchical facets. */
   includedFieldIds: string[],
   /** The delimiter for determining facet hierarchies, defaults to "\>". */

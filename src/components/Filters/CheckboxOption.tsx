@@ -1,4 +1,4 @@
-import { Filter, Matcher, NumberRangeValue, useSearchUtilities } from '@yext/search-headless-react';
+import { Filter, Matcher, NumberRangeValue } from '@yext/search-headless-react';
 import { useCallback, useEffect, useMemo } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useFiltersContext } from './FiltersContext';
@@ -70,7 +70,7 @@ const builtInCssClasses: Readonly<CheckboxCssClasses> = {
  * @param props - {@link Filters.CheckboxOptionProps}
  */
 export function CheckboxOption(props: CheckboxOptionProps): JSX.Element | null {
-  const { searchValue, fieldId, isOptionsDisabled } = useFilterGroupContext();
+  const { fieldId, isOptionsDisabled } = useFilterGroupContext();
   const {
     value,
     matcher = Matcher.Equals,
@@ -80,7 +80,6 @@ export function CheckboxOption(props: CheckboxOptionProps): JSX.Element | null {
   } = props;
   const cssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
   const optionId = useMemo(() => uuid(), []);
-  const searchUtilities = useSearchUtilities();
   const { selectFilter, filters, applyFilters } = useFiltersContext();
 
   const handleClick = useCallback((checked: boolean) => {
@@ -107,34 +106,15 @@ export function CheckboxOption(props: CheckboxOptionProps): JSX.Element | null {
   }, [fieldId, value, matcher]);
   const existingStoredFilter = findSelectableFilter(optionFilter, filters);
 
-  const shouldRenderOption: boolean = useMemo(() => {
-    if (typeof displayName !== 'string') {
-      console.error('A displayName is needed for filter with value', value);
-      return false;
-    }
-
-    if (!searchUtilities.isCloseMatch(displayName, searchValue)) {
-      return false;
-    }
-
-    return true;
-  }, [value, searchUtilities, displayName, searchValue]);
-
   useEffect(() => {
-    if (shouldRenderOption) {
-      if (!existingStoredFilter && selectedByDefault) {
-        selectFilter({
-          ...optionFilter,
-          displayName: typeof displayName === 'string' ? displayName : undefined,
-          selected: true
-        });
-      }
+    if (!existingStoredFilter && selectedByDefault) {
+      selectFilter({
+        ...optionFilter,
+        displayName: typeof displayName === 'string' ? displayName : undefined,
+        selected: true
+      });
     }
-  }, [displayName, selectFilter, selectedByDefault, existingStoredFilter, optionFilter, shouldRenderOption]);
-
-  if (!shouldRenderOption) {
-    return null;
-  }
+  }, [displayName, selectFilter, selectedByDefault, existingStoredFilter, optionFilter]);
 
   const isSelected = existingStoredFilter ? existingStoredFilter.selected : false;
 

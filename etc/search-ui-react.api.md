@@ -201,6 +201,7 @@ export interface FilterGroupProps {
     fieldId: string;
     filterOptions: FilterOptionConfig[];
     searchable?: boolean;
+    showMoreLimit?: number;
     title: string;
 }
 
@@ -283,7 +284,7 @@ export interface HierarchicalFacetsCssClasses extends HierarchicalFacetDisplayCs
 }
 
 // @public
-export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'searchable' | 'excludedFieldIds'> {
+export interface HierarchicalFacetsProps extends Omit<StandardFacetsProps, 'excludedFieldIds'> {
     customCssClasses?: HierarchicalFacetsCssClasses;
     delimiter?: string;
     includedFieldIds: string[];
@@ -595,8 +596,8 @@ export interface StandardFacetsProps {
     customCssClasses?: StandardFacetsCssClasses;
     defaultExpanded?: boolean;
     excludedFieldIds?: string[];
-    searchable?: boolean;
     searchOnChange?: boolean;
+    showMoreLimit?: number;
     showOptionCounts?: boolean;
 }
 
