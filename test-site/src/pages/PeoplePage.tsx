@@ -29,6 +29,7 @@ export function PeoplePage() {
   return (
     <div>
       <SearchBar />
+      <SearchBar />
       <div className='flex'>
         <div className='w-56 shrink-0 mr-5'>
           <FilterSearch

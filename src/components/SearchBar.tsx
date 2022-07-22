@@ -397,7 +397,7 @@ export function SearchBar({
   return (
     <div className={cssClasses.searchBarContainer}>
       <Dropdown
-        className='relative z-10 bg-white border rounded-3xl border-gray-200 w-full overflow-hidden'
+        className='relative bg-white border rounded-3xl border-gray-200 w-full overflow-hidden'
         activeClassName={activeClassName}
         screenReaderText={screenReaderText}
         parentQuery={query}
@@ -435,7 +435,7 @@ function StyledDropdownMenu({ cssClasses, children }: PropsWithChildren<{
   return (
     <DropdownMenu>
       <div className={cssClasses.inputDivider} />
-      <div className='bg-white py-4 z-10'>
+      <div className='bg-white py-4'>
         {children}
       </div>
     </DropdownMenu>
