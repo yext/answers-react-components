@@ -2,20 +2,12 @@
 
 [Home](./index.md) &gt; [@yext/search-ui-react](./search-ui-react.md) &gt; [MapboxCustomOptions](./search-ui-react.mapboxcustomoptions.md)
 
-## MapboxCustomOptions interface
+## MapboxCustomOptions type
 
 Interface for customizing the [Mapbox()](./search-ui-react.mapbox.md) map derived from Mapbox API's Map options. The "container" field is set internally.
 
 <b>Signature:</b>
 
 ```typescript
-export interface MapboxCustomOptions extends Omit<MapboxOptions, 'container'> 
+export declare type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
 ```
-<b>Extends:</b> Omit&lt;MapboxOptions, 'container'&gt;
-
-## Properties
-
-|  Property | Type | Description |
-|  --- | --- | --- |
-|  [style](./search-ui-react.mapboxcustomoptions.style.md) | mapboxgl.Style \| string |  |
-

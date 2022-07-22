@@ -2,15 +2,14 @@ import React, { useRef, useEffect } from 'react';
 import mapboxgl from 'mapbox-gl';
 import { Map, MapboxOptions, MarkerOptions } from 'mapbox-gl';
 import { Result } from '@yext/search-headless-react';
+
 /**
  * Interface for customizing the {@link Mapbox} map derived from Mapbox API's Map options.
  * The "container" field is set internally.
  *
  * @public
  */
-export interface MapboxCustomOptions extends Omit<MapboxOptions, 'container'> {
-  style: mapboxgl.Style | string
-};
+export type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
 
 /**
  * Props for the {@link Mapbox} component
@@ -18,6 +17,7 @@ export interface MapboxCustomOptions extends Omit<MapboxOptions, 'container'> {
  * @public
  */
 export interface MapboxProps {
+  mapSize: string,
   mapboxApiKey: string,
   mapboxOptions?: MapboxCustomOptions,
   generateMarkerOptions?: (result?: Result, index?: number) => MarkerOptions,
@@ -32,19 +32,22 @@ export interface MapboxProps {
  * @public
  */
 export function Mapbox({
+  mapSize,
   mapboxApiKey,
   mapboxOptions,
-  generateMarkerOptions = defaultGenerateMarkerOptions,
+  generateMarkerOptions = defaultGenerateMarkerOptions
 }: MapboxProps) {
   mapboxgl.accessToken = mapboxApiKey;
   const mapContainer = useRef(null);
   const map = useRef<Map|null>(null);
   const mapboxOptionsWithRef = useRef<MapboxOptions>();
+  const mapboxStyle = mapboxOptions?.style ?? 'mapbox://styles/mapbox/streets-v11';
 
   useEffect(() => {
     if (mapContainer.current && !map.current) {
       const options: MapboxOptions = {
         container: mapContainer.current,
+        style: mapboxStyle,
         ...mapboxOptions
       };
       map.current = new Map(options);
@@ -52,16 +55,8 @@ export function Mapbox({
     }
   });
 
-  useEffect(() => {
-    if (map.current) {
-      map.current.resize();
-    }
-  });
-
   return (
-    <div className='h-10'>
-      <div ref={mapContainer} />
-    </div>
+    <div ref={mapContainer} className={mapSize}/>
   );
 }
 

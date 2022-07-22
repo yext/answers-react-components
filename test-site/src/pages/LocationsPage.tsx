@@ -21,7 +21,7 @@ export function LocationsPage() {
   const mapboxOptions: MapboxCustomOptions = {
     center: [-70.9, 42.35],
     zoom: 10,
-    style: 'mapbox://styles/mapbox/streets-v11',
+    trackResize: true
   }
 
   return (
@@ -35,10 +35,13 @@ export function LocationsPage() {
               <ResultsCount />
               <AppliedFilters />
             </div>
-            <Mapbox 
-              mapboxApiKey='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
-              mapboxOptions={mapboxOptions}
-              />
+            <div className='h-96 w-80'>
+              <Mapbox
+                mapSize = 'h-full w-full' 
+                mapboxApiKey='pk.eyJ1IjoieWV4dCIsImEiOiJqNzVybUhnIn0.hTOO5A1yqfpN42-_z_GuLw'
+                mapboxOptions={mapboxOptions}
+                />
+            </div>
             <VerticalResults
               CardComponent={StandardCard}
             />

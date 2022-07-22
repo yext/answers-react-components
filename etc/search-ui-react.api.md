@@ -11,7 +11,6 @@ import { AnalyticsService } from '@yext/analytics';
 import { AutocompleteResponse } from '@yext/search-headless-react';
 import { DirectAnswer as DirectAnswer_2 } from '@yext/search-headless-react';
 import { HighlightedValue } from '@yext/search-headless-react';
-import { default as mapboxgl_2 } from 'mapbox-gl';
 import { MapboxOptions } from 'mapbox-gl';
 import { MarkerOptions } from 'mapbox-gl';
 import { Matcher } from '@yext/search-headless-react';
@@ -328,13 +327,10 @@ export interface LocationBiasProps {
 }
 
 // @public
-export function Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions, }: MapboxProps): JSX.Element;
+export function Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions }: MapboxProps): JSX.Element;
 
 // @public
-export interface MapboxCustomOptions extends Omit<MapboxOptions, 'container'> {
-    // (undocumented)
-    style: mapboxgl_2.Style | string;
-}
+export type MapboxCustomOptions = Omit<MapboxOptions, 'container'>;
 
 // @public
 export interface MapboxProps {

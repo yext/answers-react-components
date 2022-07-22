@@ -22,7 +22,7 @@
 |  [HierarchicalFacets({ searchOnChange, collapsible, defaultExpanded, includedFieldIds, customCssClasses, delimiter, showMoreLimit })](./search-ui-react.hierarchicalfacets.md) | A component that displays hierarchical facets, in a tree level structure, applicable to the current vertical search. |
 |  [isCtaData(data)](./search-ui-react.isctadata.md) | Type guard for CtaData. |
 |  [LocationBias({ geolocationOptions, customCssClasses })](./search-ui-react.locationbias.md) | A React Component which displays and collects location information in order to bias searches. |
-|  [Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions, })](./search-ui-react.mapbox.md) | A component that renders a map with markers to show result locations. |
+|  [Mapbox({ mapboxApiKey, mapboxOptions, generateMarkerOptions })](./search-ui-react.mapbox.md) | A component that renders a map with markers to show result locations. |
 |  [NumericalFacets({ searchOnChange, includedFieldIds, getFilterDisplayName, inputPrefix, customCssClasses, ...filterGroupProps })](./search-ui-react.numericalfacets.md) | A component that displays numerical facets applicable to the current vertical search. |
 |  [Pagination(props)](./search-ui-react.pagination.md) | Renders a component that divide a series of vertical results into chunks across multiple pages and enable user to navigate between those pages. |
 |  [renderHighlightedValue(highlightedValueOrString, customCssClasses)](./search-ui-react.renderhighlightedvalue.md) | Renders a HighlightedValue with highlighting based on its matchedSubstrings. |
@@ -68,7 +68,6 @@
 |  [HighlightedValueCssClasses](./search-ui-react.highlightedvaluecssclasses.md) | The CSS class interface for [renderHighlightedValue()](./search-ui-react.renderhighlightedvalue.md)<!-- -->. |
 |  [LocationBiasCssClasses](./search-ui-react.locationbiascssclasses.md) | The CSS class interface for the [LocationBias()](./search-ui-react.locationbias.md) component. |
 |  [LocationBiasProps](./search-ui-react.locationbiasprops.md) | The props for the [LocationBias()](./search-ui-react.locationbias.md) component. |
-|  [MapboxCustomOptions](./search-ui-react.mapboxcustomoptions.md) | Interface for customizing the [Mapbox()](./search-ui-react.mapbox.md) map derived from Mapbox API's Map options. The "container" field is set internally. |
 |  [MapboxProps](./search-ui-react.mapboxprops.md) | Props for the [Mapbox()](./search-ui-react.mapbox.md) component |
 |  [NumericalFacetsCssClasses](./search-ui-react.numericalfacetscssclasses.md) | The CSS class interface for [NumericalFacets()](./search-ui-react.numericalfacets.md)<!-- -->. |
 |  [NumericalFacetsProps](./search-ui-react.numericalfacetsprops.md) | Props for the [NumericalFacets()](./search-ui-react.numericalfacets.md) component. |
@@ -120,6 +119,7 @@
 |  [DropdownItemProps](./search-ui-react.dropdownitemprops.md) | Props for the [DropdownItem()](./search-ui-react.dropdownitem.md)<!-- -->. |
 |  [FeedbackType](./search-ui-react.feedbacktype.md) | Analytics event types for quality feedback. |
 |  [FocusedItemData](./search-ui-react.focuseditemdata.md) | The data associated with the currently focused item. |
+|  [MapboxCustomOptions](./search-ui-react.mapboxcustomoptions.md) | Interface for customizing the [Mapbox()](./search-ui-react.mapbox.md) map derived from Mapbox API's Map options. The "container" field is set internally. |
 |  [onSearchFunc](./search-ui-react.onsearchfunc.md) | The interface of a function which is called on a search. |
 |  [RenderEntityPreviews](./search-ui-react.renderentitypreviews.md) | The type of a functional React component which renders entity previews using a map of vertical key to the corresponding VerticalResults data. |
 |  [SectionComponent](./search-ui-react.sectioncomponent.md) | A component that can be used to render a section template for vertical results. |
