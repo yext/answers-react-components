@@ -9,14 +9,14 @@ A component that renders search results for a vertical page.
 <b>Signature:</b>
 
 ```typescript
-export declare function VerticalResults(props: VerticalResultsProps): JSX.Element | null;
+export declare function VerticalResults<T>(props: VerticalResultsProps<T>): JSX.Element | null;
 ```
 
 ## Parameters
 
 |  Parameter | Type | Description |
 |  --- | --- | --- |
-|  props | [VerticalResultsProps](./search-ui-react.verticalresultsprops.md) | [VerticalResultsProps](./search-ui-react.verticalresultsprops.md) |
+|  props | [VerticalResultsProps](./search-ui-react.verticalresultsprops.md)<!-- -->&lt;T&gt; | [VerticalResultsProps](./search-ui-react.verticalresultsprops.md) |
 
 <b>Returns:</b>
 

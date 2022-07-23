@@ -2,12 +2,16 @@
 
 [Home](./index.md) &gt; [@yext/search-ui-react](./search-ui-react.md) &gt; [VerticalConfigMap](./search-ui-react.verticalconfigmap.md)
 
-## VerticalConfigMap interface
+## VerticalConfigMap type
 
 A map of verticalKey to a VerticalConfig.
 
 <b>Signature:</b>
 
 ```typescript
-export interface VerticalConfigMap 
+export declare type VerticalConfigMap<T = Record<string, DefaultRawDataType>> = {
+    [K in keyof T]: VerticalConfig<T[K]>;
+};
 ```
+<b>References:</b> [DefaultRawDataType](./search-ui-react.defaultrawdatatype.md)<!-- -->, [VerticalConfig](./search-ui-react.verticalconfig.md)
+

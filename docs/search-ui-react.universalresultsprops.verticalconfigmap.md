@@ -9,5 +9,5 @@ A mapping of verticalKey to the configuration for each vertical.
 <b>Signature:</b>
 
 ```typescript
-verticalConfigMap: VerticalConfigMap;
+verticalConfigMap: VerticalConfigMap<T>;
 ```

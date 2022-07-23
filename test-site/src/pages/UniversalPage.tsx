@@ -10,6 +10,9 @@ import {
 } from '@yext/search-ui-react';
 import classNames from 'classnames';
 import { useLayoutEffect } from 'react';
+// import { CustomCard } from '../components/CustomCard';
+// import { CustomCard2 } from '../components/CustomCard2';
+// import { CustomSection } from '../components/CustomSection';
 import { config } from '../config';
 
 
@@ -73,6 +76,21 @@ export default function UniversalPage(): JSX.Element {
           people: {}
         }}
       />
+      {/* Test generic result type  */}
+      {/* <UniversalResults
+        verticalConfigMap={{
+          people: {
+            CardComponent: CustomCard,
+            SectionComponent: CustomSection
+          },
+          products: {
+            CardComponent: CustomCard2
+          },
+          links: {
+            SectionComponent: CustomSection
+          }
+        }}
+      /> */}
     </div>
   );
 }

@@ -9,7 +9,7 @@ A component that can be used to render a section template for vertical results.
 <b>Signature:</b>
 
 ```typescript
-export declare type SectionComponent = (props: SectionProps) => JSX.Element | null;
+export declare type SectionComponent<T> = (props: SectionProps<T>) => JSX.Element | null;
 ```
 <b>References:</b> [SectionProps](./search-ui-react.sectionprops.md)
 

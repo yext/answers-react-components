@@ -9,5 +9,5 @@ A functional component that can be used to render a result card.
 <b>Signature:</b>
 
 ```typescript
-CardComponent: CardComponent;
+CardComponent: CardComponent<T>;
 ```

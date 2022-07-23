@@ -22,7 +22,7 @@ const builtInCssClasses: Readonly<StandardSectionCssClasses> = {
  *
  * @public
  */
-export interface StandardSectionProps extends SectionProps {
+export interface StandardSectionProps<T> extends SectionProps<T> {
   /** CSS classes for customizing the component styling. */
   customCssClasses?: StandardSectionCssClasses
 }
@@ -35,7 +35,7 @@ export interface StandardSectionProps extends SectionProps {
  * @param props - {@link StandardSectionProps}
  * @returns A React element for a standard section, or null if there are no results to display
  */
-export function StandardSection(props: StandardSectionProps): JSX.Element | null {
+export function StandardSection<T>(props: StandardSectionProps<T>): JSX.Element | null {
   const cssClasses = useComposedCssClasses(builtInCssClasses, props.customCssClasses);
   const { results, CardComponent = StandardCard, header } = props;
 

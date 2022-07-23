@@ -9,9 +9,9 @@ Props for a StandardCard.
 <b>Signature:</b>
 
 ```typescript
-export interface StandardCardProps extends CardProps 
+export interface StandardCardProps extends CardProps<any> 
 ```
-<b>Extends:</b> [CardProps](./search-ui-react.cardprops.md)
+<b>Extends:</b> [CardProps](./search-ui-react.cardprops.md)<!-- -->&lt;any&gt;
 
 ## Properties
 

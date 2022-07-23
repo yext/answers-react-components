@@ -17,9 +17,9 @@ export interface VerticalResultsCssClasses {
  *
  * @public
  */
-export interface VerticalResultsProps {
+export interface VerticalResultsProps<T> {
   /** {@inheritDoc CardComponent} */
-  CardComponent: CardComponent,
+  CardComponent: CardComponent<T>,
   /**
    * Whether or not all results should be displayed when there are none returned from the search.
    * Defaults to true.
@@ -37,14 +37,15 @@ export interface VerticalResultsProps {
  * @param props - {@link VerticalResultsProps}
  * @returns A React element for the results, or null if no results should be displayed
  */
-export function VerticalResults(props: VerticalResultsProps): JSX.Element | null {
+export function VerticalResults<T>(props: VerticalResultsProps<T>): JSX.Element | null {
   const { displayAllOnNoResults = true, ...otherProps } = props;
   const verticalResults = useSearchState(state => state.vertical.results) || [];
   const allResultsForVertical =
     useSearchState(state => state.vertical?.noResults?.allResultsForVertical.results) || [];
   const isLoading = useSearchState(state => state.searchStatus.isLoading);
 
-  let results = verticalResults;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let results = verticalResults as any;
   if (verticalResults.length === 0 && displayAllOnNoResults) {
     results = allResultsForVertical;
   }

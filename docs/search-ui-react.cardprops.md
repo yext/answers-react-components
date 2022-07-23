@@ -9,7 +9,7 @@ The props provided to every [CardComponent](./search-ui-react.cardcomponent.md)<
 <b>Signature:</b>
 
 ```typescript
-export interface CardProps<T = Record<string, unknown>> 
+export interface CardProps<T = DefaultRawDataType> 
 ```
 
 ## Properties

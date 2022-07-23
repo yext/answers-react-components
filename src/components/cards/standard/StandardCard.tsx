@@ -8,7 +8,8 @@ import { StandardCardDisplay, StandardCardCssClasses } from './StandardCardDispl
  *
  * @public
  */
-export interface StandardCardProps extends CardProps {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export interface StandardCardProps extends CardProps<any> {
   /** Whether or not to show thumbs up/down buttons to provide feedback on the result card */
   showFeedbackButtons?: boolean,
   /** CSS classes for customizing the component styling. */

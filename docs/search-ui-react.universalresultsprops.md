@@ -9,7 +9,7 @@ Props for [UniversalResults()](./search-ui-react.universalresults.md)<!-- -->.
 <b>Signature:</b>
 
 ```typescript
-export interface UniversalResultsProps 
+export interface UniversalResultsProps<T> 
 ```
 
 ## Properties
@@ -18,5 +18,5 @@ export interface UniversalResultsProps
 |  --- | --- | --- |
 |  [customCssClasses?](./search-ui-react.universalresultsprops.customcssclasses.md) | [UniversalResultsCssClasses](./search-ui-react.universalresultscssclasses.md) | <i>(Optional)</i> CSS classes for customizing the component styling. |
 |  [showAppliedFilters?](./search-ui-react.universalresultsprops.showappliedfilters.md) | boolean | <i>(Optional)</i> Whether or not to show the applied filters. |
-|  [verticalConfigMap](./search-ui-react.universalresultsprops.verticalconfigmap.md) | [VerticalConfigMap](./search-ui-react.verticalconfigmap.md) | A mapping of verticalKey to the configuration for each vertical. |
+|  [verticalConfigMap](./search-ui-react.universalresultsprops.verticalconfigmap.md) | [VerticalConfigMap](./search-ui-react.verticalconfigmap.md)<!-- -->&lt;T&gt; | A mapping of verticalKey to the configuration for each vertical. |
 

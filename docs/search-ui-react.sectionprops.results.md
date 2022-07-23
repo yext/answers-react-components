@@ -9,5 +9,5 @@ The results from this vertical.
 <b>Signature:</b>
 
 ```typescript
-results: Result[];
+results: Result<T>[];
 ```

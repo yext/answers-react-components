@@ -1,4 +1,5 @@
 import { CardComponent } from './cardComponent';
+import { DefaultRawDataType } from './DefaultRawDataType';
 import { SectionComponent } from './sectionComponent';
 import { VerticalLink } from './verticalLink';
 
@@ -7,11 +8,11 @@ import { VerticalLink } from './verticalLink';
  *
  * @public
  */
-export interface VerticalConfig {
+export interface VerticalConfig<T = DefaultRawDataType> {
   /** {@inheritDoc SectionComponent} */
-  SectionComponent?: SectionComponent,
+  SectionComponent?: SectionComponent<T>,
   /** The card to use for this vertical. */
-  CardComponent?: CardComponent,
+  CardComponent?: CardComponent<T>,
   /** The label for the vertical. */
   label?: string,
   /** Whether or not this vertical should show a button to view all results on the vertical page. */
@@ -30,7 +31,6 @@ export interface VerticalConfig {
  *
  * @public
  */
-export interface VerticalConfigMap {
-  /** Config mapped to a vertical. */
-  [verticalKey: string]: VerticalConfig
-}
+export type VerticalConfigMap<T = Record<string, DefaultRawDataType>> = {
+  [K in keyof T]: VerticalConfig<T[K]>
+};

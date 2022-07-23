@@ -9,5 +9,5 @@ The card to use for this vertical.
 <b>Signature:</b>
 
 ```typescript
-CardComponent?: CardComponent;
+CardComponent?: CardComponent<T>;
 ```
