@@ -1,6 +1,6 @@
-import { useSearchState } from '@yext/search-headless-react';
+import { useSearchState, SelectableFilter as DisplayableFilter } from '@yext/search-headless-react';
 import { useComposedCssClasses } from '../hooks/useComposedCssClasses';
-import { pruneAppliedFilters } from '../utils/appliedfilterutils';
+import { pruneAppliedFilters, getDuplicateFacets } from '../utils/appliedfilterutils';
 import { useMemo } from 'react';
 import classNames from 'classnames';
 import { AppliedFiltersDisplay } from './AppliedFiltersDisplay';
@@ -70,6 +70,19 @@ export function AppliedFilters(props: AppliedFiltersProps): JSX.Element {
     hierarchicalFacetsFieldIds
   } = props;
 
+  const duplicateFacets: DisplayableFilter[] = useMemo(() => {
+    return getDuplicateFacets(
+      hasResults ? (filters ?? {}) : {},
+      hiddenFields ?? ['builtin.entityType'],
+      hierarchicalFacetsFieldIds ?? [],
+    );
+  }, [
+    hasResults,
+    filters,
+    hiddenFields,
+    hierarchicalFacetsFieldIds,
+  ]);
+
   const appliedFilters: GroupedFilters = useMemo(() => {
     return pruneAppliedFilters(
       hasResults ? (filters ?? {}) : {},
@@ -91,9 +104,11 @@ export function AppliedFilters(props: AppliedFiltersProps): JSX.Element {
   cssClasses.appliedFiltersContainer = classNames(cssClasses.appliedFiltersContainer, {
     [cssClasses.appliedFiltersLoading ?? '']: isLoading
   });
+  console.log(duplicateFacets);
   return <AppliedFiltersDisplay
     {...appliedFilters}
     cssClasses={cssClasses}
     hierarchicalFacetsDelimiter={hierarchicalFacetsDelimiter}
+    duplicateFacets={duplicateFacets}
   />;
 }

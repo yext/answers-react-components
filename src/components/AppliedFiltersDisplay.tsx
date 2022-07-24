@@ -12,6 +12,7 @@ import { DEFAULT_HIERARCHICAL_DELIMITER } from './Filters/HierarchicalFacetDispl
 import { executeSearch } from '../utils/search-operations';
 import { useCallback } from 'react';
 import { isDescendantHierarchicalFacet } from '../utils/appliedfilterutils';
+import { isDuplicateFilter } from '../utils/filterutils';
 
 /**
  * Properties for {@link AppliedFilters}.
@@ -25,6 +26,7 @@ export interface AppliedFiltersDisplayProps {
   hierarchicalFacets?: DisplayableHierarchicalFacet[],
   /** Filters that are applied to the search results from the backend's natural language processing. */
   nlpFilters?: DisplayableFilter[],
+  duplicateFacets?: DisplayableFilter[],
   /** {@inheritDoc HierarchicalFacetsProps.delimiter} */
   hierarchicalFacetsDelimiter?: string,
   /** CSS classes for customizing the component styling. */
@@ -42,6 +44,7 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
     nlpFilters = [],
     staticFilters = [],
     facets = [],
+    duplicateFacets,
     hierarchicalFacets = [],
     hierarchicalFacetsDelimiter = DEFAULT_HIERARCHICAL_DELIMITER,
     cssClasses = {}
@@ -109,6 +112,18 @@ export function AppliedFiltersDisplay(props: AppliedFiltersDisplayProps): JSX.El
 
   const handleRemoveStaticFilterOption = (filter: DisplayableFilter) => {
     searchActions.setOffset(0);
+    const { fieldId, matcher, value } = filter;
+    if (duplicateFacets) {
+      duplicateFacets.forEach(facet => {
+        if (isDuplicateFilter(filter, facet)){
+          if (isNearFilterValue(value)) {
+            console.error('A Filter with a NearFilterValue is not a supported RemovableFilter.');
+            return;
+          }
+          searchActions.setFacetOption(fieldId, { matcher, value }, false);
+        }
+      });
+    }
     searchActions.setFilterOption({ ...filter, selected: false });
     executeSearch(searchActions);
   };

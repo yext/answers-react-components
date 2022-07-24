@@ -33,6 +33,12 @@ const mockedFacets = [{
     count: 1,
     displayName: 'Yext Reviews',
     selected: true
+  }, {
+    value: 'val',
+    matcher: Matcher.Equals,
+    count: 1,
+    displayName: 'Yext Sites',
+    selected: true
   }],
   displayName: 'Product'
 }];
@@ -112,16 +118,15 @@ describe('AppliedFilters', () => {
     expect(screen.queryByText(staticFilterDisplayName)).toBeFalsy();
   });
 
-  it('The "X" button for an applied static filter deselects the filter option', () => {
+  it('The "X" button for an applied static filter deselects the filter option and duplicate facet if exists', () => {
     const actions = spyOnActions();
 
     render(<AppliedFilters />);
-    const removeFilterButton = screen.getByRole('button', { name: 'Remove "Yext Sites" filter' });
+    const removeFilterButton = screen.getAllByRole('button', { name: 'Remove "Yext Sites" filter' })[0];
     userEvent.click(removeFilterButton);
 
-    expect(actions.setFilterOption).toHaveBeenCalledWith(expect.objectContaining({
-      selected: false
-    }));
+    const isSelected = actions.setFacetOption.mock.calls[0][2];
+    expect(isSelected).toBe(false);
   });
 
   it('The "X" button for an applied facet deselects the facet option', () => {

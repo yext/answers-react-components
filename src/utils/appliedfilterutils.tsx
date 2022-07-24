@@ -25,6 +25,38 @@ function pruneNlpFilters(
   return filterHiddenFields(duplicatesRemoved, hiddenFields);
 }
 
+export function getDuplicateFacets(
+  appliedFiltersState: FiltersState,
+  hiddenFields: string[],
+  hierarchicalFieldIds: string[],
+): DisplayableFilter[] {
+  const appliedStaticFilters = filterHiddenFields(
+    appliedFiltersState?.static?.filter(filter => filter.selected) ?? [], hiddenFields);
+  const appliedFacets =
+  filterHiddenFields(getDisplayableFacets(appliedFiltersState.facets ?? [], hierarchicalFieldIds)
+    .filter(facet => facet.selected), hiddenFields);
+  const duplicatesFacets = appliedFacets.filter(appliedFacet => {
+    const isDuplicate = appliedStaticFilters.find(appliedStaticFilter => {
+      return isDuplicateFilter(appliedFacet, appliedStaticFilter);
+    });
+    return isDuplicate;
+  });
+  return duplicatesFacets;
+}
+
+function removeDuplicateFacets(
+  appliedStaticFilters: DisplayableFilter[],
+  appliedFacets: DisplayableFilter[]
+): DisplayableFilter[] {
+  const duplicatesRemoved = appliedFacets.filter(appliedFacet => {
+    const isDuplicate = appliedStaticFilters.find(appliedStaticFilter => {
+      return isDuplicateFilter(appliedFacet, appliedStaticFilter);
+    });
+    return !isDuplicate;
+  });
+  return duplicatesRemoved;
+}
+
 /**
  * Returns a new list of applied filters with filter on hiddenFields removed
  * from the given applied filter list.
@@ -64,6 +96,7 @@ export function pruneAppliedFilters(
 
   const prunedStaticFilters = filterHiddenFields(displayableStaticFilters, hiddenFields);
   const prunedFacets = filterHiddenFields(displayableFacets, hiddenFields);
+  const deDupedFacets = removeDuplicateFacets(prunedStaticFilters, prunedFacets);
   const prunedHierarchicalFacets = filterHiddenFields(activeHierarchicalFacets, hiddenFields);
   const prunedNlpFilters = pruneNlpFilters(
     displayableNlpFilters,
@@ -73,7 +106,7 @@ export function pruneAppliedFilters(
 
   return {
     staticFilters: prunedStaticFilters,
-    facets: prunedFacets,
+    facets: deDupedFacets,
     hierarchicalFacets: prunedHierarchicalFacets,
     nlpFilters: prunedNlpFilters
   };
